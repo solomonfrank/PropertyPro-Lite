@@ -89,7 +89,9 @@ ul.navbar-link {
 
 
 
-
+.icon{
+    margin-right:10px;
+}
 
 span.icon-bar {
     background-color: white;
