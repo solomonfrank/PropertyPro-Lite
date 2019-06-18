@@ -346,21 +346,7 @@ text-align:center;
 }
 
 
-#pwd{
-margin-left:5%;
-}
-.form-control{
-text-align:center;
-margin:20px;
-      text-transform:capitalize;
-      font-size:20px;
-    
-    
 
-}
-.label-wrap{
-margin-left:-280px;
-}
 
 .login-title{
 
@@ -393,7 +379,7 @@ input[type="checkbox"]{
 .form-control input[type="submit"]{
   background-color:green;
   padding:10px;
-  width:69%;
+  width:90%;
   color:white;
   border:none;
  
@@ -403,14 +389,30 @@ input[type="checkbox"]{
 }
 .login-title{
 text-align:center;
+
+}
+.login-title h3{
+    font-size:30px;
 }
 
 
   
 
-  
+    .form-control{
+      
+        margin-left:80px;
+      
+        }
+        .form-control input[type="text"],input[type="password"]{
+            width:90%;
+          
+          
+          
+          
+          }
 
- 
+    
+            
 
  
 
