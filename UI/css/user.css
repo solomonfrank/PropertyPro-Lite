@@ -142,9 +142,10 @@ color:white;
 .desc-cont{
   min-height:100px;
 }
+
 .display-icon a .fa-fw {
   text-align:center;
-  margin-left:120px;
+  margin-left:38%;
 }
 .desc-cont p{
   text-align:center;
@@ -418,13 +419,13 @@ header a{
    }
     .display-icon a .fa-fw {
       text-align:center;
-      margin-left:80px;
+      margin-left:140px;
     }
   
     .img-wrapper{
  
  
-      left:100px;
+      left:120px;
      
     
     }
