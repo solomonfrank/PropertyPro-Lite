@@ -455,7 +455,22 @@ header a{
       width: 20%;  
      
     }
+    #btn-del{
+      border:none;
+      background-color:red;
+      padding:10px 25px;
+      color:white;
+    font-size:18px;
+    border-radius:5px;
+    }
     
+    td a{
+      padding:10px 25px;
+      background-color:#394C7E;
+      border-radius:5px;
+      color:white;
+    
+    }
    
 }
 
@@ -554,11 +569,12 @@ font-size:18px;
 border-radius:5px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
 
-#unsold{
-  background-color:red;
+
+tr:nth-child(even){background-color: #f2f2f2
 }
+
+
 #sold{
   background-color:green;
 }
@@ -566,10 +582,19 @@ tr:nth-child(even){background-color: #f2f2f2}
 #btn-del{
   border:none;
   background-color:red;
-  padding:10px 25px;
+  padding:5px;
   color:white;
-font-size:18px;
+font-size:15px;
 border-radius:5px;
+margin-bottom: 10px;
 }
 
+td a{
 
+  background-color:#394C7E;
+  border-radius:5px;
+  color:white;
+  font-size:15px;
+  padding:8px;
+
+}
