@@ -515,20 +515,28 @@ h3 {
 }
 
 #btn {
-  margin-top: 2.5em;
-
-  width: 100%;
+ 
   border:none;
+  padding:10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color:#394C7E;
+  color:white;
+  margin-right:10px;
+ 
+
+
+}
+#btn2 {
+ 
+  border:1px solid #394C7E;;
   padding:10px;
   font-size: 18px;
   cursor: pointer;
-  background-color:green;
-  color:white;
+ 
+  color:#394C7E;;
   margin-right:10px;
-  margin-left:30px;
-
-
-
+ 
 
 
 }

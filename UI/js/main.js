@@ -11,8 +11,9 @@ document.querySelector('.icon').addEventListener('click', () => {
         imgWrapper.classList.toggle('img-open');
     }
 
+
 });
-let modalBtn = document.getElementById("btn-del")
+let modalBtn = document.getElementById("btn-del") || document.getElementById("sold")
 let modal = document.querySelector(".modal")
 let closeBtn = document.querySelector(".close-btn")
 let close = document.querySelector(".close")
