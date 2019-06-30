@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Joi from 'joi';
 import usersData from '../model/User';
-
+import propData from '../model/Property';
 import Validation from '../helpers/Validation';
 import Auth from '../helpers/Auth';
 import Response from '../helpers/Response';
@@ -96,6 +96,32 @@ class UserController {
             return Response.onError(res, 500, 'internal server error');
         }
     }
+    static async create(req, res) {
+        const schema = Validation.init().validateCreateProp();
+        const clean = Joi.validate(req.body, schema);
+        if (clean.error) {
+            return Response.onError(res, 400, clean.error.details[0].message);
+        }
+
+        const userId = req.userDt.id;
+        const ownerDetail = usersData.find(item => (item.id === parseInt(userId, 10)));
+
+        const body = {
+            id: propData.length + 1,
+            owner: userId,
+            ...clean.value,
+            ownerEmail: ownerDetail.email,
+        };
+        body.created_on = new Date();
+        propData.push(body);
+
+
+        return Response.onSuccess(res, 201, body);
+    }
+
+
+
+
 }
 
 export default UserController;

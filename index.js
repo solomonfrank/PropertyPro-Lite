@@ -1,10 +1,15 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-duplicates */
+
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import UserController from './controller/userController';
-
 import dotenv from 'dotenv';
+import UserController from './controller/userController';
+import Auth from './helpers/Auth';
+
 dotenv.config();
+
 const app = express();
 
 
@@ -18,12 +23,14 @@ app.use(
 
 app.post('/api/v1/signup', UserController.signup);
 app.post('/api/v1/signin', UserController.signin);
+app.post('/api/v1/create', Auth.verifyToken, UserController.create);
+
 
 
 // Set environment Port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-
+    // eslint-disable-next-line no-console
     console.log(`listening to port ${PORT}`);
 });
 
