@@ -17,7 +17,7 @@ app.use(
 );
 
 app.post('/api/v1/signup', UserController.signup);
-
+app.post('/api/v1/signin', UserController.signin);
 
 
 // Set environment Port
