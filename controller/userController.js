@@ -56,6 +56,46 @@ class UserController {
         const displayUser = { ...userVal };
         return Response.onSuccess(res, 201, displayUser);
     }
+
+    static async signin(req, res) {
+        const schema = Validation.init().validateSignin();
+        const clean = Joi.validate(req.body, schema);
+        if (clean.error) {
+            return Response.onError(res, 400, clean.error.details[0].message);
+        }
+        const { email, password } = clean.value;
+        // const body = { email };
+
+
+        try {
+            const userDetail = usersData.find(item => (item.email === email));
+
+
+            if (!userDetail) {
+                return Response.onError(res, 400, 'invalid credential');
+            }
+
+            const hashPassword = userDetail.password;
+
+
+            const pass = await Validation.init().verifyPassword(password, hashPassword);
+
+
+            if (!pass) {
+                return Response.onError(res, 400, 'invalid email or password');
+            }
+            const payload = {
+                id: userDetail.id,
+
+
+            };
+            userDetail.token = await Auth.generateToken(payload, res);
+            const copyUserDetail = { ...userDetail };
+            return Response.onSuccess(res, 200, copyUserDetail);
+        } catch (error) {
+            return Response.onError(res, 500, 'internal server error');
+        }
+    }
 }
 
 export default UserController;
