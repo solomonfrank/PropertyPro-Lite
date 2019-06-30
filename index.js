@@ -1,10 +1,31 @@
-import http from 'http';
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
+import express from 'express';
+import bodyParser from 'body-parser';
+import UserController from './controller/userController';
 
-console.log('Server running at http://127.0.0.1:1337/');
+import dotenv from 'dotenv';
+dotenv.config();
+const app = express();
 
-export default server;
+
+app.use(bodyParser.json());
+
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    }),
+);
+
+app.post('/api/v1/signup', UserController.signup);
+
+
+
+// Set environment Port
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+
+    console.log(`listening to port ${PORT}`);
+});
+
+
+export default app;
