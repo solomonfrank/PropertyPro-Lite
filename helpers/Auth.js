@@ -1,11 +1,11 @@
-
+/* eslint-disable consistent-return */
 
 import jwt from 'jsonwebtoken';
 import Response from './Response';
 
 
 import usersData from '../model/User';
-
+// import { create } from 'domain';
 
 const Auth = {
 
@@ -39,7 +39,7 @@ const Auth = {
             const params = { id };
 
 
-
+            // const result = await User.init().find(params);
             const useId = usersData.find(item => (item.id === params.id));
             if (!useId) {
                 return Response.onError(res, 400, 'invalid token provided');
