@@ -138,6 +138,23 @@ class UserController {
         return Response.onError(res, 200, prop);
     }
 
+    static async updateStatus(req, res) {
+        const editBody = req.body;
+        const { id } = req.params;
+
+        if (!id) {
+            return Response.onError(res, 400, 'Bad Request');
+        }
+        const prop = propData.find(item => (item.id === parseInt(id, 10)));
+        if (!prop) {
+            return Response.onError(res, 404, 'property not found');
+        }
+
+        prop.status = editBody.status;
+
+        return Response.onError(res, 200, prop);
+    }
+
 
 }
 

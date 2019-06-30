@@ -25,6 +25,7 @@ app.post('/api/v1/signup', UserController.signup);
 app.post('/api/v1/signin', UserController.signin);
 app.post('/api/v1/create', Auth.verifyToken, UserController.create);
 app.patch('/api/v1/property/:id', Auth.verifyToken, UserController.update);
+app.patch('/api/v1/property/:id/sold', Auth.verifyToken, UserController.updateStatus);
 
 
 
