@@ -189,7 +189,9 @@ class UserController {
         }
         return Response.onError(res, 200, found);
     }
-
+    static async getAllProperty(req, res) {
+        return Response.onSuccess(res, 200, propData);
+    }
 
 }
 
