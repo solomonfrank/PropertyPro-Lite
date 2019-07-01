@@ -155,6 +155,24 @@ class UserController {
         return Response.onError(res, 200, prop);
     }
 
+    static async delete(req, res) {
+        const { id } = req.params;
+
+        if (!id) {
+            return Response.onError(res, 400, 'Bad Request');
+        }
+        const found = propData.find(item => (item.id === parseInt(id, 10)));
+
+        const propIndex = propData.indexOf(found);
+
+        if (propIndex === -1) {
+            return Response.onError(res, 400, 'property not found');
+        }
+        propData.splice(propIndex, 1);
+
+        return Response.onError(res, 200, 'property successfully deleted');
+    }
+
 
 }
 
