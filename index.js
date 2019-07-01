@@ -27,6 +27,7 @@ app.post('/api/v1/create', Auth.verifyToken, UserController.create);
 app.patch('/api/v1/property/:id', Auth.verifyToken, UserController.update);
 app.patch('/api/v1/property/:id/sold', Auth.verifyToken, UserController.updateStatus);
 app.delete('/api/v1/property/:id', Auth.verifyToken, UserController.delete);
+app.get('/api/v1/property/:id', UserController.viewProp);
 
 
 

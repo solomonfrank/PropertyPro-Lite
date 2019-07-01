@@ -173,6 +173,23 @@ class UserController {
         return Response.onError(res, 200, 'property successfully deleted');
     }
 
+    static async viewProp(req, res) {
+        const { id } = req.params;
+        const { type } = req.query;
+        let found;
+
+        if (typeof type === 'undefined') {
+            found = propData.find(item => (item.id === parseInt(id, 10)));
+        } else {
+            found = propData.find(item => (item.type === type));
+        }
+
+        if (!found) {
+            return Response.onError(res, 404, 'property not found');
+        }
+        return Response.onError(res, 200, found);
+    }
+
 
 }
 
