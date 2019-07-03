@@ -53,6 +53,7 @@ class UserController {
         };
 
         usersData.push(userVal);
+
         const displayUser = { ...userVal };
         return Response.onSuccess(res, 201, displayUser);
     }
@@ -89,7 +90,9 @@ class UserController {
 
 
             };
+
             userDetail.token = await Auth.generateToken(payload, res);
+
             const copyUserDetail = { ...userDetail };
             return Response.onSuccess(res, 200, copyUserDetail);
         } catch (error) {

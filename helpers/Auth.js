@@ -39,6 +39,7 @@ const Auth = {
             const params = { id };
 
 
+
             // const result = await User.init().find(params);
             const useId = usersData.find(item => (item.id === params.id));
             if (!useId) {
