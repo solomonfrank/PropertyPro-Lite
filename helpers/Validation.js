@@ -108,8 +108,7 @@ class Validation {
     }
 
     async verifyPassword(password, hash) {
-        console.log(password);
-        console.log(hash);
+
         this.hash = hash;
         this.plainPassword = password;
 

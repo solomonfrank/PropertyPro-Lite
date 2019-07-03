@@ -6,16 +6,16 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for update specific property endpoint', () => {
-    it('user can update  specific details property  if valid token provided', (done) => {
+describe('Testing for update status property endpoint', () => {
+    it('user can update  status property  if valid token provided', (done) => {
         //mock login to get token
-        const valid_input = {
+        const validInput = {
             "email": "test6@yahoo.com",
             "password": "1234567"
         }
 
         chai.request(app).post('/api/v1/signin')
-            .send(valid_input)
+            .send(validInput)
             .end((err, response) => {
 
 
@@ -23,14 +23,10 @@ describe('Testing for update specific property endpoint', () => {
                 const propId = 1;
                 const data = {
 
-                    status: 'available',
-                    price: 52525,
-                    state: 'Lagos',
-                    city: 'Lagos',
-                    address: 'Lagos',
-                    type: '2bedroom',
+                    "status": "sold"
+
                 };
-                chai.request(app).patch(`/api/v1/property/${propId}`)
+                chai.request(app).patch(`/api/v1/property/${propId}/sold`)
                     .set('x-access-token', token)
                     .send(data)
                     .end((err, res) => {
@@ -56,16 +52,13 @@ describe('Testing for update specific property endpoint', () => {
     })
 
 
-
-    it('user can not update property when token is missing', (done) => {
+    it('user can not update status property when token is missing', (done) => {
         const token = null;
         const propId = 1;
         const data = {
 
-            status: 'available',
-            price: 52525,
-            state: 'Lagos',
-            city: 'Lagos',
+            status: 'sold',
+
 
         };
 
@@ -85,50 +78,20 @@ describe('Testing for update specific property endpoint', () => {
             });
     });
 
-    it('user can not update property when token is missing', (done) => {
-        const token = null;
-        const propId = 1;
-        const data = {
-
-            status: 'available',
-            price: 52525,
-            state: 'Lagos',
-            city: 'Lagos',
-
-        };
-
-        chai
-            .request(app)
-
-            .patch(`/api/v1/property/${propId}`)
-            .set('x-access-token', token)
-            .send(data)
-            .end((err, res) => {
-                res.body.should.be.a('object');
-                res.body.should.have.status(500);
-                res.body.should.have.property('data').equal('Internal server error');
-
-                res.body.should.have.property('status').equal(500);
-                done();
-            });
-    });
-
-    it('user can not update property when token is missing', (done) => {
+    it('user can not status update property when token is missing', (done) => {
         const token = '';
         const propId = 1;
         const data = {
 
-            status: 'available',
-            price: 52525,
-            state: 'Lagos',
-            city: 'Lagos',
+            status: 'sold',
+
 
         };
 
         chai
             .request(app)
 
-            .patch(`/api/v1/property/${propId}`)
+            .patch(`/api/v1/property/${propId}/sold`)
             .set('x-access-token', token)
             .send(data)
             .end((err, res) => {
@@ -140,4 +103,6 @@ describe('Testing for update specific property endpoint', () => {
                 done();
             });
     });
+
+
 });
