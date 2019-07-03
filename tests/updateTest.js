@@ -7,20 +7,20 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Testing for create property endpoint', () => {
-    it('user can create property  if valid token provided', (done) => {
+    it('user can update  specific details property  if valid token provided', (done) => {
         //mock login to get token
         const valid_input = {
             "email": "test6@yahoo.com",
             "password": "1234567"
         }
-        //send login request to the app to receive token
+
         chai.request(app).post('/api/v1/signin')
             .send(valid_input)
             .end((err, response) => {
 
-                //add token to next request Authorization headers as Bearer adw3R£$4wF43F3waf4G34fwf3wc232!w1C"3F3VR
-                const token = response.body.data.token;
 
+                const token = response.body.data.token;
+                const propId = 1;
                 const data = {
 
                     status: 'available',
@@ -30,24 +30,24 @@ describe('Testing for create property endpoint', () => {
                     address: 'Lagos',
                     type: '2bedroom',
                 };
-                chai.request(app).post('/api/v1/create')
+                chai.request(app).patch(`/api/v1/property/${propId}`)
                     .set('x-access-token', token)
                     .send(data)
                     .end((err, res) => {
 
-                        res.body.should.have.status(201);
+                        res.body.should.have.status(200);
                         res.body.should.be.a('object');
                         res.body.should.have.property('data');
                         res.body.data.should.have.property('id');
                         res.body.data.should.have.property('status');
-                        res.body.data.should.have.property('ownerEmail');
+
                         res.body.data.should.have.property('price');
                         res.body.data.should.have.property('state');
                         res.body.data.should.have.property('city');
                         res.body.data.should.have.property('address');
                         res.body.data.should.have.property('type');
                         res.body.data.should.have.property('created_on');
-                        res.body.should.have.property('status').equal(201);
+                        res.body.should.have.property('status').equal(200);
 
 
                         done();
