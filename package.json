@@ -44,6 +44,7 @@
     "chai-http": "^4.3.0",
     "chai-like": "^1.1.1",
     "chai-things": "^0.2.0",
+    "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.4",
     "eslint-config-airbnb-base": "^13.1.0",
     "istanbul": "^0.4.5",
