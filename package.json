@@ -8,8 +8,8 @@
     "start": "babel-node index.js",
     "dev": "nodemon --exec babel-node index.js",
     "build": "babel index.js -d dist",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "nyc --reporter=lcov --reporter=text-summary npm test"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
   "repository": {
     "type": "git",
