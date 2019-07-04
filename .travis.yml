@@ -4,7 +4,9 @@ node_js:
 cache:
   directories:
     - "node_modules"
-
+addons:
+  code_climate:
+    REPO_TOKEN : process.env.CODE_CLIMATE_REPO_TOKEN
 script:
  - npm run test
  
