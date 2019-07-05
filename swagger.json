@@ -1,0 +1,522 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "PropertyPro-Lite APi",
+        "version": "1.0.0",
+        "description": "Property Pro Lite is a platform where people can create and/or search properties for sale or rent.",
+        "contact": "solomonfrank73@hotmail.com",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "https://propertyprolite-app.herokuapp.com",
+    "basepath": "",
+    "tags": [
+        {
+            "name": "user",
+            "description": "API for user entity"
+        },
+        {
+            "name": "property",
+            "description": " API for property entity"
+        },
+        {
+            "name": "Flag",
+            "description": "API for flag entity"
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/v1/signin": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "sign in user",
+                "description": "User can login using this endpoint.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Login user object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/loginModel"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successfully loggedin",
+                        "schema": {
+                            "type": "object",
+                            "example": {
+                                "status": 200,
+                                "data": {
+                                    "id": 2,
+                                    "firstName": "test",
+                                    "lastName": "est",
+                                    "email": "test6@yahoo.com",
+                                    "gender": "male",
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOnsiaWQiOjJ9LCJpYXQiOjE1NjIyNTcyNDh9.5tpZf5CTJU31Tl6tvDmfqlCJgxxLfWi92htf6Ok21IU",
+                                    "address": "5 hillary street",
+                                    "createdAt": "2019-06-29T15:22:03.415Z"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/signup": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": " user can sign up",
+                "description": "User can signup using this endpoint.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User's should be able to sign up",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/signUpModel"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": " signup was successful",
+                        "schema": {
+                            "type": "object",
+                            "example": {
+                                "status": 200,
+                                "data": {
+                                    "email": "test9@yahoo.com",
+                                    "password": "1234567",
+                                    "confirmPassword": "1234567",
+                                    "firstName": "test",
+                                    "lastName": "test",
+                                    "gender": "male",
+                                    "address": " 5 test street "
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "example": {
+                                "status": 400,
+                                "data": "Email already exist"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server error",
+                        "example": {
+                            "status": 500,
+                            "data": "internal server error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/create": {
+            "post": {
+                "tags": [
+                    "property"
+                ],
+                "summary": "user can create propery",
+                "description": "User can property  using this endpoint.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/createPropertyModel"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "type": "string",
+                        "name": "x-access-token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "property successfully created",
+                        "schema": {
+                            "type": "object",
+                            "example": {
+                                "status": 201,
+                                "data": {
+                                    "id": 2,
+                                    "owner": 2,
+                                    "status": "available",
+                                    "price": 52525,
+                                    "state": "Lagos",
+                                    "city": "Lagos",
+                                    "address": "Lagos",
+                                    "type": "2bedroom",
+                                    "ownerEmail": "test6@yahoo.com",
+                                    "created_on": "2019-07-05T11:03:03.044Z"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/property/{id}": {
+            "get": {
+                "tags": [
+                    "property"
+                ],
+                "summary": "user can view a specific propery",
+                "description": "User can property a specific using this endpoint.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "search was successful",
+                        "schema": {
+                            "type": "object",
+                            "example": {
+                                "status": 200,
+                                "data": {
+                                    "id": 2,
+                                    "owner": 2,
+                                    "status": "available",
+                                    "price": 52525,
+                                    "state": "Lagos",
+                                    "city": "Lagos",
+                                    "address": "Lagos",
+                                    "type": "2bedroom",
+                                    "ownerEmail": "test6@yahoo.com",
+                                    "created_on": "2019-07-05T11:03:03.044Z"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "404": {
+                        "description": "Result not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "property"
+                ],
+                "summary": "user can update propertry details",
+                "description": "User can update details of theproperty  using this endpoint.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "objects",
+                            "properties": {
+                                "status": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "type": "string",
+                        "name": "x-access-token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "property successfully updated",
+                        "schema": {
+                            "type": "object",
+                            "example": {
+                                "status": 201,
+                                "data": {
+                                    "id": 2,
+                                    "owner": 2,
+                                    "status": "available",
+                                    "price": 52525,
+                                    "state": "Lagos",
+                                    "city": "Lagos",
+                                    "address": "Lagos",
+                                    "type": "2bedroom",
+                                    "ownerEmail": "test6@yahoo.com",
+                                    "created_on": "2019-07-05T11:03:03.044Z"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/property": {
+            "get": {
+                "tags": [
+                    "property"
+                ],
+                "summary": "user can view all propery",
+                "description": "User can property all using this endpoint.",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "name": "property"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "loaded was successfully",
+                        "schema": {
+                            "type": "object",
+                            "example": [
+                                {
+                                    "status": 200,
+                                    "data": {
+                                        "id": 2,
+                                        "owner": 2,
+                                        "status": "available",
+                                        "price": 52525,
+                                        "state": "Lagos",
+                                        "city": "Lagos",
+                                        "address": "Lagos",
+                                        "type": "2bedroom",
+                                        "ownerEmail": "test6@yahoo.com",
+                                        "created_on": "2019-07-05T11:03:03.044Z"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "404": {
+                        "description": "Result not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/property/{id}/sold": {
+            "patch": {
+                "tags": [
+                    "property"
+                ],
+                "summary": "user can view all propery",
+                "description": "User can property all using this endpoint.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": false,
+                        "type": "string",
+                        "name": "id"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "objects",
+                            "properties": {
+                                "status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "type": "string",
+                        "name": "x-access-token",
+                        "required": true
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "loaded was successfully",
+                        "schema": {
+                            "type": "object",
+                            "example": [
+                                {
+                                    "status": 200,
+                                    "data": {
+                                        "id": 2,
+                                        "owner": 2,
+                                        "status": "available",
+                                        "price": 52525,
+                                        "state": "Lagos",
+                                        "city": "Lagos",
+                                        "address": "Lagos",
+                                        "type": "2bedroom",
+                                        "ownerEmail": "test6@yahoo.com",
+                                        "created_on": "2019-07-05T11:03:03.044Z"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "404": {
+                        "description": "Result not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "loginModel": {
+            "type": "objects",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "createPropertyModel": {
+            "type": "objects",
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            }
+        },
+        "signUpModel": {
+            "type": "objects",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "confirmPassword": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            }
+        },
+        "loginOutput": {
+            "type": "object",
+            "properties": {
+                "status": "string",
+                "data": "object"
+            }
+        }
+    }
+}
