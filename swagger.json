@@ -10,7 +10,7 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "https://propertyprolite-app.herokuapp.com",
+    "host": "propertyprolite-app.herokuapp.com",
     "basepath": "",
     "tags": [
         {
