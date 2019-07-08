@@ -3,6 +3,8 @@
 
 
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import UserController from './controller/userController';
@@ -13,13 +15,14 @@ dotenv.config();
 
 const app = express();
 
-(async () => {
-    await Db.createUsersTable();
-}
 
-)().catch(err => err.stack);
 
-// console.log(Db.getInstance());
+
+console.log(Db.getInstance());
+
+const options = {
+    explorer: true,
+};
 app.use(bodyParser.json());
 
 app.use(
@@ -27,7 +30,7 @@ app.use(
         extended: true,
     }),
 );
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.post('/api/v1/signup', UserController.signup);
 app.post('/api/v1/signin', UserController.signin);
 app.post('/api/v1/create', Auth.verifyToken, UserController.create);
