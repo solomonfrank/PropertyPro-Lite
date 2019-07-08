@@ -7,12 +7,19 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import UserController from './controller/userController';
 import Auth from './helpers/Auth';
+import Db from './config/connection'
 
 dotenv.config();
 
 const app = express();
 
+(async () => {
+    await Db.createUsersTable();
+}
 
+)().catch(err => err.stack);
+
+// console.log(Db.getInstance());
 app.use(bodyParser.json());
 
 app.use(
