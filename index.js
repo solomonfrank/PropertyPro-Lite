@@ -9,10 +9,16 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import UserController from './controller/userController';
 import Auth from './helpers/Auth';
+import Db from './config/connection'
 
 dotenv.config();
 
 const app = express();
+
+
+
+
+console.log(Db.getInstance());
 
 const options = {
     explorer: true,
