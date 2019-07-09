@@ -15,9 +15,7 @@ class User extends Model {
         return super.find(param);
     }
 
-    async getById(id) {
-        return super.findById(id, '*');
-    }
+
 }
 
 

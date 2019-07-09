@@ -102,5 +102,8 @@ class Model {
 
         return client.query(`${this.sql}`, [this.accountNum]);
     }
+    async getById(id) {
+        return findById(id, '*');
+    }
 }
 export default Model;

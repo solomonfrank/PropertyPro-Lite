@@ -38,6 +38,13 @@ class Validation {
             .required());
     }
 
+    validateUpdate() {
+        this.schema = {
+            status: this.sanitizeName()
+        }
+
+        return this.schema;
+    }
 
     validateRegister() {
         this.schema = {
@@ -89,17 +96,7 @@ class Validation {
         return this.schema;
     }
 
-    validateCreateAccount() {
-        this.schema = {
-            phone: this.sanitizePhone(),
-            address: this.sanitizeName(),
-            type: this.sanitizeName(),
-            balance: Joi.number(),
 
-
-        };
-        return this.schema;
-    }
 
 
     async hashPassword(password) {
