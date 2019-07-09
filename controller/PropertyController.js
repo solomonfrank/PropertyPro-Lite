@@ -109,7 +109,7 @@ class PropertyController {
     static async delete(req, res) {
 
         let id = req.params.id;
-        console.log(id);
+
         if (isNaN(id)) {
             return Response.onError(res, 400, 'invalid property number');
         }
@@ -151,6 +151,40 @@ class PropertyController {
         } catch (err) {
 
             return Response.onError(res, 200, 'Internal server error');
+        }
+
+    }
+
+    static async getProperty(req, res) {
+
+        let id = req.params.id;
+
+        if (isNaN(id)) {
+
+
+            return Response.onError(res, 400, 'invalid property number');
+        }
+        try {
+            const found = await Property.init().findById(id, '*');
+            if (typeof found.rows[0] === 'undefined') {
+
+                return Response.onError(res, 404, 'property does not exist');
+            }
+            const result = await Property.init().findById(id, '*');
+
+
+            let resultArray = result.rows;
+
+
+            if (resultArray.length < 1) {
+                return Response.onSuccess(res, 200, 'result not found');
+
+            }
+            return Response.onSuccess(res, 200, resultArray)
+        } catch (err) {
+
+            return Response.onError(res, 200, 'Internal server error');
+
         }
 
     }
