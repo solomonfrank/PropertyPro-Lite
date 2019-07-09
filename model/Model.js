@@ -37,6 +37,7 @@ class Model {
     async findAll(field) {
         this.field = field;
         this.sql = `SELECT ${this.field} FROM ${this._table}`;
+
         const client = await pool;
 
         return client.query(`${this.sql}`);
