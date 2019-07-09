@@ -105,6 +105,34 @@ class PropertyController {
 
 
     }
+
+    static async delete(req, res) {
+
+        let id = req.params.id;
+        console.log(id);
+        if (isNaN(id)) {
+            return Response.onError(res, 400, 'invalid property number');
+        }
+
+
+        try {
+
+            const found = await Property.init().findById(id, '*');
+            // console.log(found.rows[0]);
+            if (typeof found.rows[0] === 'undefined') {
+
+                return Response.onError(res, 404, 'property does not exist');
+            }
+
+            await Property.init().delete(id);
+            return Response.onSuccess(res, 200, 'property deleted succesfully');
+
+        } catch (err) {
+            //return Response.onError(res, 500, 'internal server error');
+            console.log(err.stack);
+
+        }
+    }
 }
 
 
