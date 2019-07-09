@@ -6,6 +6,8 @@ import propData from '../model/Property';
 import Validation from '../helpers/Validation';
 import Auth from '../helpers/Auth';
 import Response from '../helpers/Response';
+import User from '../model/User';
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,33 +31,40 @@ class UserController {
         }
 
         const {
-            firstName, lastName, email, gender, password, address,
+            firstName, lastName, email, gender, password, address, phoneNumber,
         } = clean.value;
 
         const token = await Auth.generateToken(email);
 
+        if (!token) {
+            return Response.onError(res, 500, 'Internal server errr due to token');
+        }
 
 
         const body = {
-            firstName, lastName, email, gender, password, token, address,
+            firstName, lastName, email, gender, password, token, address, phoneNumber,
         };
         body.password = await Validation.init().hashPassword(password);
         body.createdAt = new Date();
 
-        const foundEmail = usersData.find(item => (item.email === body.email));
 
-        if (foundEmail) {
-            return Response.onError(res, 400, 'email already exist');
+        try {
+            console.log(body);
+            const result = await User.init().insert(body);
+
+
+            return Response.onSuccess(res, 201, result.rows[0]);
+        } catch (error) {
+            console.log(error.stack);
+
+            if (error.routine === '_bt_check_unique') {
+                return Response.onError(res, 400, 'email already exist');
+            }
+
         }
-        const userVal = {
-            id: usersData.length + 1,
-            ...body,
-        };
 
-        usersData.push(userVal);
 
-        const displayUser = { ...userVal };
-        return Response.onSuccess(res, 201, displayUser);
+        return Response.onError(res, 500, 'Internal server error');
     }
 
     static async signin(req, res) {

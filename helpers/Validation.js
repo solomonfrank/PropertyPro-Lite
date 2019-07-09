@@ -48,6 +48,7 @@ class Validation {
             confirmPassword: this.sanitizeConfirmPassword().label('confirm password'),
             gender: this.sanitizeName(),
             address: this.sanitizeName(),
+            phoneNumber: this.sanitizePhone(),
         };
 
 
