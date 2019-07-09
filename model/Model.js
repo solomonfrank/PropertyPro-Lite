@@ -15,6 +15,7 @@ class Model {
         this.id = id;
 
         this.sql = `SELECT  ${this.field} FROM ${this._table} WHERE id = $1`;
+
         const client = await pool;
 
         return client.query(`${this.sql}`, [this.id]);
@@ -94,10 +95,10 @@ class Model {
         return client.query(`${this.sql}`, this.values);
     }
 
-    async delete(accountNum) {
-        this.accountNum = accountNum;
+    async delete(id) {
+        this.accountNum = id
 
-        this.sql = `DELETE FROM ${this._table} WHERE accountnum= $1 RETURNING *`;
+        this.sql = `DELETE FROM ${this._table} WHERE id= $1 RETURNING *`;
         const client = await pool;
 
         return client.query(`${this.sql}`, [this.accountNum]);
