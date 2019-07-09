@@ -38,11 +38,36 @@ class PropertyController {
             return Response.onSuccess(res, 201, result.rows[0]);
 
         } catch (err) {
-            console.log(err.stack);
 
-            // return Response(500, res, "Internal server error");
+
+            return Response(500, res, "Internal server error");
         }
 
+
+    }
+    static async update(req, res) {
+
+        let propId = req.params.id;
+
+        let schema = Validation.init().validateCreateProp();
+        let clean = Joi.validate(req.body, schema);
+        if (clean.error) {
+
+            return Response.onError(res, 400, clean.error.details[0].message)
+        }
+
+        let { status, state, price, city } = clean.value;
+
+        let body = { state, status, price, city };
+        try {
+
+            let result = await Property.init().update(propId, body);
+            return Response.onSuccess(res, 200, result.rows[0]);
+
+        } catch (err) {
+            // console.log(err.stack);
+            return Response.onError(res, 500, "Internal server error");
+        }
 
     }
 }
