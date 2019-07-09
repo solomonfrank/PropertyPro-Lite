@@ -100,8 +100,8 @@ class UserController {
 
             return Response.onSuccess(res, 200, result.rows[0]);
         } catch (error) {
-            console.log(error.stack);
-            // return Response.onError(res, 500, 'internal server error');
+
+            return Response.onError(res, 500, 'internal server error');
         }
     }
     static async create(req, res) {

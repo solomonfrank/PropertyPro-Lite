@@ -1,18 +1,18 @@
-const Prop = [
-    {
-        id: 1,
+import Model from './Model';
 
-        owner: 2,
-        status: 'available',
-        price: 1200000,
-        state: 'Lagos',
-        city: 'Lagos',
-        address: 'Magodo',
-        type: '2 bedroom',
-        created_on: '12-12-201',
-        image_url: 'whssxxsxhuquywywywwx',
-    },
+class Property extends Model {
 
-];
 
-export default Prop;
+    constructor(modelTable = 'property') {
+        super(modelTable);
+        this.table = modelTable;
+
+
+    }
+
+    static init() {
+        return new Property();
+    }
+}
+
+export default Property;

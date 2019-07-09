@@ -46,6 +46,26 @@ class Db {
         // Db.getInstance(this.createTableQuery).catch(err => console.log(err));
     }
 
+    static async createPropertyTable() {
+        this.createTableQuery = ` CREATE TABLE IF NOT EXISTS property(
+
+        id SERIAL PRIMARY KEY,
+        ownerId INT REFERENCES users(id),
+        status  varchar(50) not null,
+        price float not null,
+        state varchar(50) not null,
+        city varchar(50) not null,
+        address varchar(50) not null,
+        type varchar(50) not null,
+        created_on timestamp,
+        image_url varchar(100)
+       )`;
+
+        this.client = await Db.getInstance();
+        await this.client.query(`${this.createTableQuery}`);
+
+    }
+
 
 }
 
