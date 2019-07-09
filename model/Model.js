@@ -62,7 +62,7 @@ class Model {
         this.fieldValue = this.fieldValue.trim().slice(0, -1);
 
         this.queryText = `INSERT INTO ${this._table} (${this.fieldString}) VALUES (${this.fieldValue}) RETURNING *`;
-        console.log(this.queryText);
+
         const client = await pool;
 
         return client.query(`${this.queryText}`, this.values);

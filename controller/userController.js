@@ -49,22 +49,23 @@ class UserController {
 
 
         try {
-            console.log(body);
+
             const result = await User.init().insert(body);
 
 
             return Response.onSuccess(res, 201, result.rows[0]);
         } catch (error) {
-            console.log(error.stack);
+
 
             if (error.routine === '_bt_check_unique') {
                 return Response.onError(res, 400, 'email already exist');
             }
+            return Response.onError(res, 500, 'Internal server error');
 
         }
 
 
-        return Response.onError(res, 500, 'Internal server error');
+
     }
 
     static async signin(req, res) {
@@ -74,38 +75,33 @@ class UserController {
             return Response.onError(res, 400, clean.error.details[0].message);
         }
         const { email, password } = clean.value;
-        // const body = { email };
+
+        const body = { email };
 
 
         try {
-            const userDetail = usersData.find(item => (item.email === email));
 
+            const result = await User.init().findByEmail(body);
 
-            if (!userDetail) {
+            if (!result.rows[0]) {
                 return Response.onError(res, 400, 'invalid credential');
             }
-
-            const hashPassword = userDetail.password;
-
-
+            const hashPassword = result.rows[0].password;
             const pass = await Validation.init().verifyPassword(password, hashPassword);
-
-
             if (!pass) {
                 return Response.onError(res, 400, 'invalid email or password');
             }
             const payload = {
-                id: userDetail.id,
-
+                id: result.rows[0].id,
+                type: result.rows[0].type,
 
             };
+            result.rows[0].token = await Auth.generateToken(payload, res);
 
-            userDetail.token = await Auth.generateToken(payload, res);
-
-            const copyUserDetail = { ...userDetail };
-            return Response.onSuccess(res, 200, copyUserDetail);
+            return Response.onSuccess(res, 200, result.rows[0]);
         } catch (error) {
-            return Response.onError(res, 500, 'internal server error');
+            console.log(error.stack);
+            // return Response.onError(res, 500, 'internal server error');
         }
     }
     static async create(req, res) {
