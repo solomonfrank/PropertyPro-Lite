@@ -133,6 +133,27 @@ class PropertyController {
 
         }
     }
+
+    static async getAllProperty(req, res) {
+
+        try {
+
+            const result = await Property.init().findAll('*');
+
+
+            let resultArray = result.rows;
+
+            if (resultArray.length < 1) {
+                return Response.onSuccess(res, 200, 'result not found');
+
+            }
+            return Response.onSuccess(res, 200, resultArray)
+        } catch (err) {
+
+            return Response.onError(res, 200, 'Internal server error');
+        }
+
+    }
 }
 
 
