@@ -68,13 +68,13 @@ class Model {
         return client.query(`${this.queryText}`, this.values);
     }
 
-    async update(accountNum, params) {
+    async update(propId, params) {
         this.fieldKey = Object.entries(params);
         this.valueArray = Object.values(params);
 
 
         this.x = 1;
-        this.accountnum = accountNum;
+        this.propId = propId;
         this.fieldString = '';
         this.fieldValue = '';
         this.values = [];
@@ -86,7 +86,8 @@ class Model {
         });
 
         this.fieldString = this.fieldString.trimEnd().slice(0, -1);
-        this.sql = `UPDATE ${this._table} SET ${this.fieldString} WHERE accountnum  = ${this.accountnum} RETURNING *`;
+        this.sql = `UPDATE ${this._table} SET ${this.fieldString} WHERE id  = ${this.propId} RETURNING *`;
+
 
         const client = await pool;
 
