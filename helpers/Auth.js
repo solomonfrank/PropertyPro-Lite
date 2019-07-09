@@ -2,9 +2,11 @@
 
 import jwt from 'jsonwebtoken';
 import Response from './Response';
+import dotenv from 'dotenv';
+dotenv.config();
 
 
-import usersData from '../model/User';
+import User from '../model/User';
 // import { create } from 'domain';
 
 const Auth = {
@@ -23,35 +25,42 @@ const Auth = {
 
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
-        const token = req.headers['x-access-token'];
+        const bearerHead = req.headers['authorization'];
+        if (typeof bearerHead === 'undefined') {
+            return Response.onError(res, 403, 'forbidden');
+        }
+        let tokenArray = bearerHead.split(' ');
+        let token = tokenArray[1];
+
+
 
 
         // token = token.trim();
 
         if (!token) {
-            return Response.onError(res, 400, 'Not authorize to access the page');
+            return Response.onError(res, 403, 'Not authorize to access the page');
         }
         try {
             const decoded = await jwt.verify(token, process.env.SECRET_KEY);
+
 
             const { id } = decoded.key;
 
             const params = { id };
 
 
+            const result = await User.init().find(params);
 
-            // const result = await User.init().find(params);
-            const useId = usersData.find(item => (item.id === params.id));
-            if (!useId) {
+
+            if (!result.rows[0]) {
                 return Response.onError(res, 400, 'invalid token provided');
             }
 
 
-            req.userDt = params;
-
+            req.userData = params;
             next();
         } catch (err) {
-            return Response.onError(res, 500, 'Internal server error');
+            return Response.onError(res, 403, 'invalid token provided');
         }
     },
 };

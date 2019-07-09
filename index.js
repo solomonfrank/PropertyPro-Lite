@@ -5,6 +5,7 @@ import swaggerDocument from './swagger.json';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import UserController from './controller/userController';
+import PropertyController from './controller/PropertyController';
 import Auth from './helpers/Auth';
 import Db from './config/connection'
 
@@ -14,7 +15,8 @@ const app = express();
 
 
 (async () => {
-    Db.createUsersTable()
+    // Db.createUsersTable();
+    Db.createPropertyTable();
 })().catch(err => console.log(err.stack));
 
 const options = {
@@ -30,7 +32,7 @@ app.use(
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.post('/api/v1/signup', UserController.signup);
 app.post('/api/v1/signin', UserController.signin);
-app.post('/api/v1/create', Auth.verifyToken, UserController.create);
+app.post('/api/v1/create', Auth.verifyToken, PropertyController.create);
 app.patch('/api/v1/property/:id', Auth.verifyToken, UserController.update);
 app.patch('/api/v1/property/:id/sold', Auth.verifyToken, UserController.updateStatus);
 app.delete('/api/v1/property/:id', Auth.verifyToken, UserController.delete);
