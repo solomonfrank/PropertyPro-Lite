@@ -1,5 +1,6 @@
 import { Pool } from 'pg';
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 let connectionString = process.env.DATABASE_LOCAL_URL;
@@ -13,7 +14,7 @@ class Db {
         return this.conn;
     }
 
-    async static getInstance() {
+    static async getInstance() {
         if (!this.pool) {
             this.pool = new Db();
         }
@@ -21,7 +22,7 @@ class Db {
     }
 
 
-    async static createUsersTable() {
+    static async createUsersTable() {
         this.createTableQuery = `
     CREATE TABLE IF NOT EXISTS
     users(
@@ -31,6 +32,7 @@ class Db {
   gender VARCHAR (20) NOT NULL,
   email VARCHAR(120) UNIQUE NOT NULL,
   password VARCHAR(128) NOT NULL,
+  phoneNumber VARCHAR(120) NOT NULL,
   address VARCHAR(128) NOT NULL,
   isAdmin BOOLEAN DEFAULT FALSE,
   token TEXT NOT NULL,

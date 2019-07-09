@@ -1,6 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/no-duplicates */
-
 
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
@@ -16,9 +13,9 @@ dotenv.config();
 const app = express();
 
 
-
-
-console.log(Db.getInstance());
+(async () => {
+    Db.createUsersTable()
+})().catch(err => console.log(err.stack));
 
 const options = {
     explorer: true,
