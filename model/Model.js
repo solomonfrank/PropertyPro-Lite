@@ -97,12 +97,12 @@ class Model {
     }
 
     async delete(id) {
-        this.accountNum = id
+        this.id = id
 
         this.sql = `DELETE FROM ${this._table} WHERE id= $1 RETURNING *`;
         const client = await pool;
 
-        return client.query(`${this.sql}`, [this.accountNum]);
+        return client.query(`${this.sql}`, [this.id]);
     }
     async getById(id) {
         return findById(id, '*');

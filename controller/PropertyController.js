@@ -173,7 +173,7 @@ class PropertyController {
             const result = await Property.init().findById(id, '*');
 
 
-            let resultArray = result.rows;
+            let resultArray = result.rows[0];
 
 
             if (resultArray.length < 1) {

@@ -18,7 +18,7 @@ class Validation {
     }
 
     sanitizePhone() {
-        return Joi.number();
+        return Joi.number().required();
     }
 
 

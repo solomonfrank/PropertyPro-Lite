@@ -18,10 +18,11 @@ describe('Testing for signup endpoint', () => {
             lastName: 'est',
             gender: 'male',
             address: '5 hillary street',
+            phoneNumber: '7363737376',
 
 
         };
-        chai.request(app).post('/api/v1/signup').send(dataVal).end((err, res) => {
+        chai.request(app).post('/auth/api/v1/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('data').equal('"email address" is not allowed to be empty');
@@ -38,10 +39,11 @@ describe('Testing for signup endpoint', () => {
             firstName: 'test',
             lastName: 'est',
             gender: 'male',
+            phoneNumber: '7363737376',
 
 
         };
-        chai.request(app).post('/api/v1/signup').send(dataVal).end((err, res) => {
+        chai.request(app).post('/auth/api/v1/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('data').equal('"address" is required');
@@ -59,10 +61,11 @@ describe('Testing for signup endpoint', () => {
             lastName: 'est',
             gender: 'male',
             address: '',
+            phoneNumber: '7363737376',
 
 
         };
-        chai.request(app).post('/api/v1/signup').send(dataVal).end((err, res) => {
+        chai.request(app).post('/auth/api/v1/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('data').equal('"address" is not allowed to be empty');
@@ -76,7 +79,7 @@ describe('Testing for signup endpoint', () => {
             email: 'test5@yahoo.com',
             password: '1234567',
             confirmPassword: '1234567',
-
+            phoneNumber: '7363737376',
             lastName: 'est',
             gender: 'male',
             address: '5 hillary street',
@@ -85,7 +88,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/api/v1/signup')
+            .post('/auth/api/v1/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -106,7 +109,7 @@ describe('Testing for signup endpoint', () => {
             password: '1234567',
             confirmPassword: '1234567',
             firstName: 'test',
-
+            phoneNumber: '7363737376',
             gender: 'male',
             address: '5 hillary street',
 
@@ -114,7 +117,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/api/v1/signup')
+            .post('/auth/api/v1/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -136,12 +139,13 @@ describe('Testing for signup endpoint', () => {
             lastName: 'est',
             gender: 'male',
             address: '5 hillary street',
+            phoneNumber: '7363737376',
 
 
         };
         chai
             .request(app)
-            .post('/api/v1/signup')
+            .post('/auth/api/v1/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -163,12 +167,13 @@ describe('Testing for signup endpoint', () => {
             lastName: 'est',
             gender: 'male',
             address: '5 hillary street',
+            phoneNumber: '7363737376',
 
 
         };
         chai
             .request(app)
-            .post('/api/v1/signup')
+            .post('/auth/api/v1/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -176,6 +181,59 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have.property('data').equal('"password" is not allowed to be empty');
+
+                done();
+            });
+    });
+    it('User should not sign up a user when phone number is not provided', (done) => {
+        const dataVal = {
+            email: 'test5@yahoo.com',
+            password: '',
+            confirmPassword: '1234567',
+            firstName: 'test',
+            lastName: 'est',
+            gender: 'male',
+            address: '5 hillary street',
+            phoneNumber: '',
+
+
+        };
+        chai
+            .request(app)
+            .post('/auth/api/v1/signup')
+            .send(dataVal)
+            .end((err, res) => {
+                // eslint-disable-next-line no-console
+
+                res.should.have.status(400);
+                res.body.should.be.an('object');
+                res.body.should.have.property('data').equal('"password" is not allowed to be empty');
+
+                done();
+            });
+    });
+    it('User should not sign up a user when phone number is not provided', (done) => {
+        const dataVal = {
+            email: 'test5@yahoo.com',
+            password: '1234567',
+            confirmPassword: '1234567',
+            firstName: 'test',
+            lastName: 'est',
+            gender: 'male',
+            address: '5 hillary street',
+
+
+        };
+        chai
+            .request(app)
+            .post('/auth/api/v1/signup')
+            .send(dataVal)
+            .end((err, res) => {
+                // eslint-disable-next-line no-console
+
+                res.should.have.status(400);
+                res.body.should.be.an('object');
+                res.body.should.have.property('data').equal('"phoneNumber" is required');
 
                 done();
             });
@@ -190,12 +248,13 @@ describe('Testing for signup endpoint', () => {
             lastName: 'est',
             gender: 'male',
             address: '5 hillary street',
+            phoneNumber: '7363737376',
 
 
         };
         chai
             .request(app)
-            .post('/api/v1/signup')
+            .post('/auth/api/v1/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -208,16 +267,45 @@ describe('Testing for signup endpoint', () => {
             });
     });
 
-
-    it('sign up user when all fields are provided', (done) => {
+    it('User should not sign up a user if email already exist', (done) => {
         const dataVal = {
-            email: 'test5@yahoo.com',
+            email: 'test10@yahoo.com',
             password: '1234567',
             confirmPassword: '1234567',
             firstName: 'test',
             lastName: 'est',
             gender: 'male',
             address: '5 hillary street',
+            phoneNumber: '7363737376',
+
+
+        };
+        chai
+            .request(app)
+            .post('/auth/api/v1/signup')
+            .send(dataVal)
+            .end((err, res) => {
+                // eslint-disable-next-line no-console
+
+                res.should.have.status(400);
+                res.body.should.be.an('object');
+                res.body.should.have.property('data').equal('email already exist');
+
+                done();
+            });
+    });
+
+
+    it('sign up user when all fields are provided', (done) => {
+        const dataVal = {
+            email: 'test13@yahoo.com',
+            password: '1234567',
+            confirmPassword: '1234567',
+            firstName: 'test',
+            lastName: 'est',
+            gender: 'male',
+            address: '5 hillary street',
+            phoneNumber: '7363737376',
 
 
         };
@@ -225,7 +313,7 @@ describe('Testing for signup endpoint', () => {
 
         chai
             .request(app)
-            .post('/api/v1/signup')
+            .post('/auth/api/v1/signup')
             .send(dataVal)
             .end((err, res) => {
                 res.body.should.have.status(201);
@@ -234,11 +322,11 @@ describe('Testing for signup endpoint', () => {
                 res.body.data.should.have.property('id');
                 res.body.data.should.have.property('token');
                 res.body.data.should.have.property('email');
-                res.body.data.should.have.property('firstName');
-                res.body.data.should.have.property('lastName');
+                res.body.data.should.have.property('firstname');
+                res.body.data.should.have.property('lastname');
                 res.body.data.should.have.property('address');
                 res.body.data.should.have.property('gender');
-                res.body.data.should.have.property('createdAt');
+                res.body.data.should.have.property('createdat');
                 res.body.should.have.property('status');
                 done();
             });

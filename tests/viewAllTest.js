@@ -27,7 +27,7 @@ describe('Testing for fetch all properties endpoint', () => {
                 res.body.should.have.property('data');
 
                 res.body.data.should.be.an('array').that.contains.something.property('id');
-                res.body.data.should.be.an('array').that.contains.something.property('owner');
+                res.body.data.should.be.an('array').that.contains.something.property('ownerid');
                 res.body.data.should.be.an('array').that.contains.something.property('status');
                 res.body.data.should.be.an('array').that.contains.something.property('price');
                 res.body.data.should.be.an('array').that.contains.something.property('state');

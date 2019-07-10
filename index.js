@@ -30,8 +30,8 @@ app.use(
     }),
 );
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
-app.post('/api/v1/signup', UserController.signup);
-app.post('/api/v1/signin', UserController.signin);
+app.post('/auth/api/v1/signup', UserController.signup);
+app.post('/auth/api/v1/signin', UserController.signin);
 app.post('/api/v1/create', Auth.verifyToken, PropertyController.create);
 app.patch('/api/v1/property/:id', Auth.verifyToken, PropertyController.update);
 app.patch('/api/v1/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
