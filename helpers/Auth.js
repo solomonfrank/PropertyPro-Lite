@@ -16,12 +16,12 @@ const Auth = {
             const token = await jwt.sign({
                 key: data,
             }, process.env.SECRET_KEY);
-
+            console.log(token)
             return token;
+
         } catch (err) {
-            //return false;
-            console.log(err);
-            return err;
+            return false;
+
         }
     },
 
