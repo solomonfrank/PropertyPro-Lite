@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-let connectionString = process.env.DATABASE_LOCAL_URL;
+let connectionString = process.env.DATABASE_LOCAL_URL || DATABASE_URL;
 class Db {
     constructor() {
         this.conn = new Pool({
