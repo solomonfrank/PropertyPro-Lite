@@ -7,7 +7,10 @@ cache:
 addons:
   code_climate:
      CODE_CLIMATE_REPO_TOKEN : process.env.CODE_CLIMATE_REPO_TOKEN
-     
+env:
+  - DATABASE_URL :process.env.process.DATABASE_URL
+service:
+  -postgresql     
 script:
  - npm run test
  
