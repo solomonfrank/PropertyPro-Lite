@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-let connectionString = process.env.DATABASE_LOCAL_URL || DATABASE_URL;
+let connectionString = process.env.DATABASE_LOCAL_URL || process.env.DATABASE_URL;
 class Db {
     constructor() {
         this.conn = new Pool({
@@ -47,7 +47,8 @@ class Db {
     }
 
     static async createPropertyTable() {
-        this.createTableQuery = ` CREATE TABLE IF NOT EXISTS property(
+        this.createTableQuery = ` 
+        CREATE TABLE IF NOT EXISTS property(
 
         id SERIAL PRIMARY KEY,
         ownerId INT REFERENCES users(id),
@@ -59,7 +60,8 @@ class Db {
         type varchar(50) not null,
         created_on timestamp,
         image_url varchar(100)
-       )`;
+       )
+       `;
 
         this.client = await Db.getInstance();
         await this.client.query(`${this.createTableQuery}`);
