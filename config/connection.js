@@ -8,6 +8,7 @@ class Db {
     constructor() {
         this.conn = new Pool({
             connectionString,
+            ssl: true
 
         });
 
