@@ -37,7 +37,7 @@ class UserController {
         const token = await Auth.generateToken(email);
 
         if (!token) {
-            return Response.onError(res, 500, 'Internal server errr due to token');
+            return Response.onError(res, 500, token);
         }
 
 

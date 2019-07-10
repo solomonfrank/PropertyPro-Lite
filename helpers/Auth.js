@@ -21,6 +21,7 @@ const Auth = {
         } catch (err) {
             //return false;
             console.log(err);
+            return err;
         }
     },
 
