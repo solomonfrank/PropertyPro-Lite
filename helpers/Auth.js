@@ -19,7 +19,8 @@ const Auth = {
 
             return token;
         } catch (err) {
-            return false;
+            //return false;
+            console.log(err);
         }
     },
 
