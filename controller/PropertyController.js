@@ -158,12 +158,12 @@ class PropertyController {
     static async getProperty(req, res) {
 
         let id = req.params.id;
-
         if (isNaN(id)) {
-
-
             return Response.onError(res, 400, 'invalid property number');
         }
+
+
+
         try {
             const found = await Property.init().findById(id, '*');
             if (typeof found.rows[0] === 'undefined') {
@@ -183,9 +183,32 @@ class PropertyController {
             return Response.onSuccess(res, 200, resultArray)
         } catch (err) {
 
-            return Response.onError(res, 200, 'Internal server error');
+            return Response.onError(res, 500, 'Internal server error');
 
         }
+
+    }
+
+    static async searchProperty(req, res) {
+
+        let { type } = req.query;
+        let body = { type }
+        try {
+            const found = await Property.init().find(body, '*');
+            if (found.rows < 1) {
+                return Response.onSuccess(res, 200, "No record found");
+            }
+
+            return Response.onSuccess(res, 200, found.rows);
+
+        } catch (error) {
+
+
+            return Response.onError(res, 500, 'Internal server error');
+        }
+
+
+
 
     }
 }
