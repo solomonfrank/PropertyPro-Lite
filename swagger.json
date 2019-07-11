@@ -12,6 +12,13 @@
     },
     "host": "propertyprolite-app.herokuapp.com",
     "basepath": "",
+    "securityDefinitions": {
+        "Authorization": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
     "tags": [
         {
             "name": "user",
@@ -37,7 +44,7 @@
         "application/json"
     ],
     "paths": {
-        "/api/v1/signin": {
+        "/auth/api/v1/signin": {
             "post": {
                 "tags": [
                     "user"
@@ -87,7 +94,7 @@
                 }
             }
         },
-        "/api/v1/signup": {
+        "/auth/api/v1/signup": {
             "post": {
                 "tags": [
                     "user"
@@ -152,6 +159,9 @@
                 "tags": [
                     "property"
                 ],
+                "security": {
+                    "Authorization": []
+                },
                 "summary": "user can create propery",
                 "description": "User can property  using this endpoint.",
                 "parameters": [
@@ -162,12 +172,6 @@
                         "schema": {
                             "$ref": "#/definitions/createPropertyModel"
                         }
-                    },
-                    {
-                        "in": "header",
-                        "type": "string",
-                        "name": "x-access-token",
-                        "required": true
                     }
                 ],
                 "produces": [
