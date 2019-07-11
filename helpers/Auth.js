@@ -27,9 +27,9 @@ const Auth = {
 
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
-        const bearerHead = req.headers['Authorization'];
+        const bearerHead = req.headers.Authorization;
         if (typeof bearerHead === 'undefined') {
-            return Response.onError(res, 403, 'forbidden');
+            return Response.onError(res, 403, 'forbiddens');
         }
         let tokenArray = bearerHead.split(' ');
         let token = tokenArray[1];
