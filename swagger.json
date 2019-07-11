@@ -159,9 +159,11 @@
                 "tags": [
                     "property"
                 ],
-                "security": {
-                    "Authorization": []
-                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ],
                 "summary": "user can create propery",
                 "description": "User can property  using this endpoint.",
                 "parameters": [
