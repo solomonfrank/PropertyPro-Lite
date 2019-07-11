@@ -32,7 +32,7 @@ describe('Testing for create property endpoint', () => {
                     type: '2bedroom',
                 };
                 chai.request(app).post('/api/v1/create')
-                    .set('authorization', `Bearer ${token}`)
+                    .set('Authorization', `Bearer ${token}`)
                     .send(data)
                     .end((err, res) => {
 
