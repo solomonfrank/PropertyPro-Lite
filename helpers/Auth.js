@@ -16,7 +16,7 @@ const Auth = {
             const token = await jwt.sign({
                 key: data,
             }, process.env.SECRET_KEY);
-            console.log(token)
+
             return token;
 
         } catch (err) {
@@ -27,7 +27,7 @@ const Auth = {
 
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
-        const bearerHead = req.headers['authorization'];
+        const bearerHead = req.headers['Authorization'];
         if (typeof bearerHead === 'undefined') {
             return Response.onError(res, 403, 'forbidden');
         }
