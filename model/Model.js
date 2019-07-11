@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import Db from '../config/connection';
+import Response from '../helpers/Response';
 
 const pool = Db.getInstance();
 
@@ -106,6 +107,12 @@ class Model {
     }
     async getById(id) {
         return findById(id, '*');
+    }
+
+    async  insertAll(res, body) {
+        let result = await this.insert(body);
+        return Response.onSuccess(res, 201, result.rows[0]);
+
     }
 }
 export default Model;

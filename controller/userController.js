@@ -35,13 +35,9 @@ class UserController {
         } = clean.value;
 
         const token = await Auth.generateToken(email);
-        console.log(token);
-
         if (!token) {
-            return Response.onError(res, 500, 'Internal server errr due to token');
+            return Response.onError(res, 500, 'server could not generate token');
         }
-
-
         const body = {
             firstName, lastName, email, gender, password, token, address, phoneNumber,
         };
@@ -51,17 +47,18 @@ class UserController {
 
         try {
 
-            const result = await User.init().insert(body);
+            //const result = await User.init().insert(body);
+            return await User.init().insertAll(res, body);
 
-
-            return Response.onSuccess(res, 201, result.rows[0]);
+            //return Response.onSuccess(res, 201, result.rows[0]);
         } catch (error) {
 
 
             if (error.routine === '_bt_check_unique') {
                 return Response.onError(res, 400, 'email already exist');
             }
-            return Response.onError(res, 500, 'Internal server error');
+            //return Response.onError(res, 500, 'Internal server error');
+            console.log(error);
 
         }
 

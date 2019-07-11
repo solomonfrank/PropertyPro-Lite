@@ -34,8 +34,9 @@ class PropertyController {
 
         try {
 
-            let result = await Property.init().insert(body);
-            return Response.onSuccess(res, 201, result.rows[0]);
+            return await Property.init().insertAll(res, body);
+            // let result = await Property.init().insert(body);
+            //  return Response.onSuccess(res, 201, result.rows[0]);
 
         } catch (err) {
 
@@ -211,6 +212,7 @@ class PropertyController {
 
 
     }
+
 }
 
 

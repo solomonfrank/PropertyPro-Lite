@@ -15,10 +15,8 @@ const Response = {
     },
 
     onError(res, statusCode, responseText) {
-        const value = responseText;
-        if (value.password) {
-            delete value.password;
-        }
+
+
         return (res.status(statusCode).json({
             status: statusCode,
             data: responseText,
