@@ -31,7 +31,7 @@ const Auth = {
         console.log(bearerHead);
         console.log('gead');
         if (typeof bearerHead === 'undefined') {
-            return Response.onError(res, 403, 'forbiddens');
+            return Response.onError(res, 403, 'forbidden');
         }
         let tokenArray = bearerHead.split(' ');
         let token = tokenArray[1];
