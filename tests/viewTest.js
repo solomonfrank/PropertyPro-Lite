@@ -37,7 +37,7 @@ describe('Testing for view specific property endpoint', () => {
 
 
     it('user can not view specific property when property id is not found', (done) => {
-        const propId = 2;
+        const propId = 100;
 
 
         chai
