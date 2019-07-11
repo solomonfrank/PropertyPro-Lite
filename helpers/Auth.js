@@ -27,7 +27,7 @@ const Auth = {
 
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
-        const bearerHead = req.headers['Authorization'];
+        const bearerHead = req.headers.authorization || req.body.token;
         console.log(bearerHead);
         console.log('gead');
         if (typeof bearerHead === 'undefined') {
