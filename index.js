@@ -7,7 +7,9 @@ import dotenv from 'dotenv';
 import UserController from './controller/userController';
 import PropertyController from './controller/PropertyController';
 import Auth from './helpers/Auth';
-import Db from './config/connection'
+import Db from './config/connection';
+
+import MailController from './config/Mail';
 
 dotenv.config();
 
@@ -39,6 +41,7 @@ app.delete('/api/v1/property/:id', Auth.verifyToken, PropertyController.delete);
 app.get('/api/v1/property/search', PropertyController.searchProperty);
 app.get('/api/v1/property/:id', PropertyController.getProperty);
 app.get('/api/v1/property', PropertyController.getAllProperty);
+app.post('/auth/api/v1/:email/reset_password', MailController.sendMail);
 
 
 

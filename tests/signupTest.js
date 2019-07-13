@@ -298,7 +298,9 @@ describe('Testing for signup endpoint', () => {
 
     it('sign up user when all fields are provided', (done) => {
         const dataVal = {
+
             email: 'test901@gmail.com',
+
             password: '1234567',
             confirmPassword: '1234567',
             firstName: 'test',
