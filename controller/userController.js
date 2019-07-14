@@ -56,12 +56,12 @@ class UserController {
         // };
         console.log(password);
 
-        body.created_at = new Date();
+        req.body.created_at = new Date();
 
 
         try {
             console.log('hi val')
-            body.password = await Validation.init().hashPassword(password);
+            req.body.password = await Validation.init().hashPassword(password);
             console.log('afte');
             //const result = await User.init().insert(body);
             return await User.init().insertAll(res, req.body);
