@@ -49,12 +49,12 @@ class UserController {
 
             return Response.onError(res, 500, 'error', 'server could not generate token');
         }
-        console.log(password)
+
         //const body = {
         // first_name, last_name, email, password, address, street, token, phone_number, phone, country, zip, state, city, is_admin
 
         // };
-        console.log(password);
+
 
         req.body.created_at = new Date();
 
@@ -62,6 +62,7 @@ class UserController {
         try {
             console.log('hi val')
             req.body.password = await Validation.init().hashPassword(password);
+            console.log(req.body.password);
             console.log('afte');
             //const result = await User.init().insert(body);
             return await User.init().insertAll(res, req.body);
