@@ -26,9 +26,9 @@ class UserController {
     static async signup(req, res) {
         const schema = Validation.init().validateRegister();
         const clean = Joi.validate(req.body, schema);
-        //if (clean.error) {
-        //return Response.onError(res, 400, clean.error.details[0].message);
-        //}
+        if (clean.error) {
+            return Response.onError(res, 400, clean.error.details[0].message);
+        }
 
         const {
             first_name, last_name, email, password, address, phone_number
@@ -58,8 +58,8 @@ class UserController {
             if (error.routine === '_bt_check_unique') {
                 return Response.onError(res, 400, 'email already exist');
             }
-            return Response.onError(res, 500, 'Internal server error');
-            //console.log(error.stack);
+            // return Response.onError(res, 500, 'Internal server error');
+            console.log(error.stack);
 
         }
 

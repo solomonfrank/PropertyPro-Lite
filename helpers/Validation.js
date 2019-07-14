@@ -18,7 +18,7 @@ class Validation {
     }
 
     sanitizePhone() {
-        return Joi.number().required();
+        return Joi.string().min(8).required();
     }
 
 
@@ -52,7 +52,7 @@ class Validation {
             last_name: this.sanitizeName().label('last name'),
 
             password: this.sanitizePassword(),
-            phone_number: this.sanitizePhone(),
+            phone_number: this.sanitizeName(),
 
             address: this.sanitizeName(),
 
