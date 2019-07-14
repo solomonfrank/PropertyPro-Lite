@@ -111,15 +111,24 @@ class Validation {
     async hashPassword(password) {
         this.saltRounds = 10;
         this.plainPassword = password;
-        return bcrypt.hash(this.plainPassword, this.saltRounds);
+        try {
+            return bcrypt.hash(this.plainPassword, this.saltRounds);
+        } catch (err) {
+            console.log(err.stack);
+        }
+
     }
 
     async verifyPassword(password, hash) {
 
         this.hash = hash;
         this.plainPassword = password;
+        try {
+            return bcrypt.compare(this.plainPassword, this.hash);
+        } catch (err) {
+            console.log(err.stack);
+        }
 
-        return bcrypt.compare(this.plainPassword, this.hash);
     }
 }
 export default Validation;
