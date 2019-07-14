@@ -31,7 +31,7 @@ class UserController {
         }
 
         const {
-            first_name, last_name, email, password, address, phone_number,
+            first_name, last_name, email, password, address
         } = clean.value;
 
         const token = await Auth.generateToken(email);
@@ -39,7 +39,7 @@ class UserController {
             return Response.onError(res, 500, 'server could not generate token');
         }
         const body = {
-            first_name, last_name, email, password, token, address, phone_number,
+            first_name, last_name, email, password, token, address
 
         };
         body.password = await Validation.init().hashPassword(password);

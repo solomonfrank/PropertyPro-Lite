@@ -54,7 +54,7 @@ class Validation {
 
 
             address: this.sanitizeName(),
-            phone_number: this.sanitizePhone(),
+
         };
 
 

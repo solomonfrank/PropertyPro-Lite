@@ -16,10 +16,10 @@ dotenv.config();
 const app = express();
 
 
-(async () => {
-    // Db.createUsersTable();
-    Db.createPropertyTable();
-})().catch(err => console.log(err.stack));
+//(async () => {
+// Db.createUsersTable();
+// Db.createPropertyTable();
+// })().catch(err => console.log(err.stack));
 
 const options = {
     explorer: true,
