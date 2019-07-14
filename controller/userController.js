@@ -31,7 +31,7 @@ class UserController {
         }
 
         const {
-            firstName, lastName, email, gender, password, address, phoneNumber,
+            first_name, last_name, email, gender, password, address, phoneNumber,
         } = clean.value;
 
         const token = await Auth.generateToken(email);
@@ -39,7 +39,7 @@ class UserController {
             return Response.onError(res, 500, 'server could not generate token');
         }
         const body = {
-            firstName, lastName, email, gender, password, token, address, phoneNumber,
+            first_name, last_name, email, gender, password, token, address, phoneNumber,
         };
         body.password = await Validation.init().hashPassword(password);
         body.createdAt = new Date();
@@ -57,8 +57,8 @@ class UserController {
             if (error.routine === '_bt_check_unique') {
                 return Response.onError(res, 400, 'email already exist');
             }
-            //return Response.onError(res, 500, 'Internal server error');
-            console.log(error);
+            return Response.onError(res, 500, 'Internal server error');
+            //console.log(error);
 
         }
 

@@ -48,8 +48,8 @@ class Validation {
 
     validateRegister() {
         this.schema = {
-            firstName: this.sanitizeName().label('first name'),
-            lastName: this.sanitizeName().label('last name'),
+            first_name: this.sanitizeName().label('first name'),
+            last_name: this.sanitizeName().label('last name'),
             email: this.sanitizeEmail(),
             password: this.sanitizePassword(),
             confirmPassword: this.sanitizeConfirmPassword().label('confirm password'),

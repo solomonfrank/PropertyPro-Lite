@@ -23,7 +23,7 @@ describe('Testing for signin endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.a('object');
                 res.body.should.have
-                    .property('data')
+                    .property('error')
                     .equal('"email address" is not allowed to be empty');
                 res.body.should.have.property('status').equal(400);
                 done();
@@ -46,7 +46,7 @@ describe('Testing for signin endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.a('object');
                 res.body.should.have
-                    .property('data')
+                    .property('error')
                     .equal('"password" is not allowed to be empty');
                 res.body.should.have.property('status').equal(400);
 
@@ -71,12 +71,12 @@ describe('Testing for signin endpoint', () => {
                 res.body.data.should.have.property('id');
                 res.body.data.should.have.property('token');
                 res.body.data.should.have.property('email');
-                res.body.data.should.have.property('firstname');
-                res.body.data.should.have.property('lastname');
-                res.body.data.should.have.property('createdat');
+                res.body.data.should.have.property('first_name');
+                res.body.data.should.have.property('last_name');
+                res.body.data.should.have.property('created_at');
                 res.body.data.should.have.property('address');
                 res.body.data.should.have.property('phonenumber');
-                res.body.data.should.have.property('isadmin');
+                res.body.data.should.have.property('is_admin');
                 res.body.data.should.have.property('gender');
                 res.body.should.have.property('status').equal(200);
                 done();

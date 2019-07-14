@@ -19,7 +19,7 @@ const Response = {
 
         return (res.status(statusCode).json({
             status: statusCode,
-            data: responseText,
+            error: responseText,
         })
         );
     },

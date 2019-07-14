@@ -14,8 +14,8 @@ describe('Testing for signup endpoint', () => {
             email: '',
             password: '1234567',
             confirmPassword: '1234567',
-            firstName: 'test',
-            lastName: 'est',
+            first_name: 'test',
+            last_name: 'est',
             gender: 'male',
             address: '5 hillary street',
             phoneNumber: '7363737376',
@@ -25,7 +25,7 @@ describe('Testing for signup endpoint', () => {
         chai.request(app).post('/auth/api/v1/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
-            res.body.should.have.property('data').equal('"email address" is not allowed to be empty');
+            res.body.should.have.property('error').equal('"email address" is not allowed to be empty');
             res.body.should.have.property('status').equal(400);
 
             done();
@@ -36,8 +36,8 @@ describe('Testing for signup endpoint', () => {
             email: 'test@gmail.com',
             password: '1234567',
             confirmPassword: '1234567',
-            firstName: 'test',
-            lastName: 'est',
+            first_name: 'test',
+            last_name: 'est',
             gender: 'male',
             phoneNumber: '7363737376',
 
@@ -46,7 +46,7 @@ describe('Testing for signup endpoint', () => {
         chai.request(app).post('/auth/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
-            res.body.should.have.property('data').equal('"address" is required');
+            res.body.should.have.property('error').equal('"address" is required');
             res.body.should.have.property('status').equal(400);
 
             done();
@@ -57,8 +57,8 @@ describe('Testing for signup endpoint', () => {
             email: 'test@gmail.com',
             password: '1234567',
             confirmPassword: '1234567',
-            firstName: 'test',
-            lastName: 'est',
+            first_name: 'test',
+            last_name: 'est',
             gender: 'male',
             address: '',
             phoneNumber: '7363737376',
@@ -68,7 +68,7 @@ describe('Testing for signup endpoint', () => {
         chai.request(app).post('/auth/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
-            res.body.should.have.property('data').equal('"address" is not allowed to be empty');
+            res.body.should.have.property('error').equal('"address" is not allowed to be empty');
             res.body.should.have.property('status').equal(400);
 
             done();
@@ -80,7 +80,7 @@ describe('Testing for signup endpoint', () => {
             password: '1234567',
             confirmPassword: '1234567',
             phoneNumber: '7363737376',
-            lastName: 'est',
+            last_name: 'est',
             gender: 'male',
             address: '5 hillary street',
 
@@ -96,7 +96,7 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have
-                    .property('data')
+                    .property('error')
                     .equal('"first name" is required');
 
                 done();
@@ -108,7 +108,7 @@ describe('Testing for signup endpoint', () => {
             email: 'test5@yahoo.com',
             password: '1234567',
             confirmPassword: '1234567',
-            firstName: 'test',
+            first_name: 'test',
             phoneNumber: '7363737376',
             gender: 'male',
             address: '5 hillary street',
@@ -124,7 +124,7 @@ describe('Testing for signup endpoint', () => {
 
                 res.should.have.status(400);
                 res.body.should.be.an('object');
-                res.body.should.have.property('data').equal('"last name" is required');
+                res.body.should.have.property('error').equal('"last name" is required');
 
                 done();
             });
@@ -135,8 +135,8 @@ describe('Testing for signup endpoint', () => {
             email: 'test5@yahoo.com',
             password: '1234567',
             confirmPassword: '1234567',
-            firstName: '',
-            lastName: 'est',
+            first_name: '',
+            last_name: 'est',
             gender: 'male',
             address: '5 hillary street',
             phoneNumber: '7363737376',
@@ -152,7 +152,7 @@ describe('Testing for signup endpoint', () => {
 
                 res.should.have.status(400);
                 res.body.should.be.an('object');
-                res.body.should.have.property('data').equal('"first name" is not allowed to be empty');
+                res.body.should.have.property('error').equal('"first name" is not allowed to be empty');
 
                 done();
             });
@@ -163,8 +163,8 @@ describe('Testing for signup endpoint', () => {
             email: 'test5@yahoo.com',
             password: '',
             confirmPassword: '1234567',
-            firstName: 'test',
-            lastName: 'est',
+            first_name: 'test',
+            last_name: 'est',
             gender: 'male',
             address: '5 hillary street',
             phoneNumber: '7363737376',
@@ -180,7 +180,7 @@ describe('Testing for signup endpoint', () => {
 
                 res.should.have.status(400);
                 res.body.should.be.an('object');
-                res.body.should.have.property('data').equal('"password" is not allowed to be empty');
+                res.body.should.have.property('error').equal('"password" is not allowed to be empty');
 
                 done();
             });
@@ -190,8 +190,8 @@ describe('Testing for signup endpoint', () => {
             email: 'test5@yahoo.com',
             password: '',
             confirmPassword: '1234567',
-            firstName: 'test',
-            lastName: 'est',
+            first_ame: 'test',
+            last_name: 'est',
             gender: 'male',
             address: '5 hillary street',
             phoneNumber: '',
@@ -207,7 +207,7 @@ describe('Testing for signup endpoint', () => {
 
                 res.should.have.status(400);
                 res.body.should.be.an('object');
-                res.body.should.have.property('data').equal('"password" is not allowed to be empty');
+                res.body.should.have.property('error').equal('"password" is not allowed to be empty');
 
                 done();
             });
@@ -217,8 +217,8 @@ describe('Testing for signup endpoint', () => {
             email: 'test5@yahoo.com',
             password: '1234567',
             confirmPassword: '1234567',
-            firstName: 'test',
-            lastName: 'est',
+            first_name: 'test',
+            last_name: 'est',
             gender: 'male',
             address: '5 hillary street',
 
@@ -233,7 +233,7 @@ describe('Testing for signup endpoint', () => {
 
                 res.should.have.status(400);
                 res.body.should.be.an('object');
-                res.body.should.have.property('data').equal('"phoneNumber" is required');
+                res.body.should.have.property('error').equal('"phoneNumber" is required');
 
                 done();
             });
@@ -244,8 +244,8 @@ describe('Testing for signup endpoint', () => {
             email: 'test5@yahoo.com',
             password: '1234567',
             confirmPassword: '12345670',
-            firstName: 'test',
-            lastName: 'est',
+            first_name: 'test',
+            last_name: 'est',
             gender: 'male',
             address: '5 hillary street',
             phoneNumber: '7363737376',
@@ -261,7 +261,7 @@ describe('Testing for signup endpoint', () => {
 
                 res.should.have.status(400);
                 res.body.should.be.an('object');
-                res.body.should.have.property('data').equal('Password do not match');
+                res.body.should.have.property('error').equal('Password do not match');
 
                 done();
             });
@@ -289,7 +289,7 @@ describe('Testing for signup endpoint', () => {
 
                 res.should.have.status(400);
                 res.body.should.be.an('object');
-                res.body.should.have.property('data').equal('email already exist');
+                res.body.should.have.property('error').equal('email already exist');
 
                 done();
             });
@@ -303,7 +303,7 @@ describe('Testing for signup endpoint', () => {
 
             password: '1234567',
             confirmPassword: '1234567',
-            firstName: 'test',
+            first_name: 'test',
             lastName: 'est',
             gender: 'male',
             address: '5 hillary street',
@@ -324,11 +324,11 @@ describe('Testing for signup endpoint', () => {
                 res.body.data.should.have.property('id');
                 res.body.data.should.have.property('token');
                 res.body.data.should.have.property('email');
-                res.body.data.should.have.property('firstname');
-                res.body.data.should.have.property('lastname');
+                res.body.data.should.have.property('first_name');
+                res.body.data.should.have.property('last_name');
                 res.body.data.should.have.property('address');
                 res.body.data.should.have.property('gender');
-                res.body.data.should.have.property('createdat');
+                res.body.data.should.have.property('created_at');
                 res.body.should.have.property('status');
                 done();
             });

@@ -29,7 +29,7 @@ class PropertyController {
 
         let { status, price, state, city, address, type } = clean.value;
         let body = { status, price, state, city, address, type };
-        body.ownerId = ownerId;
+        body.owner = ownerId;
         body.created_on = new Date();
 
         try {
