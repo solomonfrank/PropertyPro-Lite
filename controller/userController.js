@@ -24,13 +24,15 @@ app.use(
 class UserController {
 
     static async signup(req, res) {
+
         // const schema = Validation.init().validateRegister();
         // const clean = Joi.validate(req.body, schema);
         // if (clean.error) {
         //   return Response.onError(res, 401, 'error', clean.error.details[0].message);
         //  }
 
-        const {
+
+        let {
             first_name, last_name, email, password, address, phone_number
         } = req.body;
 
