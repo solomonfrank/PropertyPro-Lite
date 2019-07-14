@@ -41,7 +41,7 @@ class Db {
   created_at TIMESTAMP
   
   
-    )
+    );
     `;
         this.client = await Db.getInstance();
         await this.client.query(`${this.createTableQuery}`);
@@ -62,7 +62,7 @@ class Db {
         type varchar(50) not null,
         created_on timestamp,
         image_url varchar(100)
-       )
+       );
        `;
 
         this.client = await Db.getInstance();

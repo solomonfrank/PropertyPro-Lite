@@ -42,7 +42,7 @@ class UserController {
             first_name, last_name, email, gender, password, token, address, phoneNumber,
         };
         body.password = await Validation.init().hashPassword(password);
-        body.createdAt = new Date();
+        body.created_at = new Date();
 
 
         try {
@@ -58,7 +58,7 @@ class UserController {
                 return Response.onError(res, 400, 'email already exist');
             }
             return Response.onError(res, 500, 'Internal server error');
-            //console.log(error);
+            //console.log(error.stack);
 
         }
 
@@ -101,6 +101,7 @@ class UserController {
         } catch (error) {
 
             return Response.onError(res, 500, 'internal server error');
+            //console.log(error.stack);
         }
     }
 
