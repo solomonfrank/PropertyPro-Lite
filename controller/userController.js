@@ -25,16 +25,18 @@ class UserController {
 
     static async signup(req, res) {
         console.log(req.body);
-        const schema = Validation.init().validateRegister();
-        const clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            return Response.onError(res, 401, 'error', clean.error.details[0].message);
-        }
+        // const schema = Validation.init().validateRegister();
+        // const clean = Joi.validate(req.body, schema);
+        // if (clean.error) {
+        // return Response.onError(res, 401, 'error', clean.error.details[0].message);
+        //}
 
 
         let {
             first_name, last_name, email, password, address, phone_number
         } = req.body;
+
+        console.log(req.body);
 
         const token = await Auth.generateToken(email);
         if (!token) {
