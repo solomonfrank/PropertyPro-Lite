@@ -8,7 +8,9 @@ class Validation {
     static init() {
         return new Validation();
     }
-
+    emailIsValid(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    }
     sanitizeEmail() {
         return (Joi.string().required().label('email address'));
     }

@@ -25,19 +25,24 @@ class UserController {
 
     static async signup(req, res) {
         console.log(req.body);
-        const schema = Validation.init().validateRegister();
-        const clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            console.log(clean.error);
-            return Response.onError(res, 400, 'error', clean.error.details[0].message);
-        }
+        //const schema = Validation.init().validateRegister();
+        //const clean = Joi.validate(req.body, schema);
+        //if (clean.error) {
+        // console.log(clean.error);
+        //return Response.onError(res, 400, 'error', clean.error.details[0].message);
+        // }
 
 
-        let {
+        const {
             first_name, last_name, email, password, address, street, phone_number, phone, country, zip, state, city, is_admin
-        } = clean.value;
+        } = req.body;
 
-
+        if (!Validation.init().emailIsValid(email)) {
+            return Response.onError(res, 400, 'error', "email address is invalid");
+        }
+        if (!password || !email) {
+            return Response.onError(res, 400, 'error', "some fields are required");
+        }
 
         const token = await Auth.generateToken(email);
         if (!token) {
