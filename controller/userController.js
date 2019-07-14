@@ -71,7 +71,7 @@ class UserController {
         const schema = Validation.init().validateSignin();
         const clean = Joi.validate(req.body, schema);
         if (clean.error) {
-            return Response.onError(res, 400, clean.error.details[0].message);
+            return Response.onError(res, 400, 'error', clean.error.details[0].message);
         }
         const { email, password } = clean.value;
 
@@ -83,12 +83,12 @@ class UserController {
             const result = await User.init().findByEmail(body);
 
             if (!result.rows[0]) {
-                return Response.onError(res, 400, 'invalid credential');
+                return Response.onError(res, 400, 'error', 'invalid credential');
             }
             const hashPassword = result.rows[0].password;
             const pass = await Validation.init().verifyPassword(password, hashPassword);
             if (!pass) {
-                return Response.onError(res, 400, 'invalid email or password');
+                return Response.onError(res, 400, 'success', 'invalid email or password');
             }
             const payload = {
                 id: result.rows[0].id,
@@ -98,10 +98,10 @@ class UserController {
             result.rows[0].token = await Auth.generateToken(payload, res);
 
 
-            return Response.onSuccess(res, 200, result.rows[0]);
+            return Response.onSuccess(res, 200, 'success', result.rows[0]);
         } catch (error) {
 
-            return Response.onError(res, 500, 'internal server error');
+            return Response.onError(res, 500, 'error', 'internal server error');
             //console.log(error.stack);
         }
     }

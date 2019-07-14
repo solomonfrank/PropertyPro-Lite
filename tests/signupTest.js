@@ -26,7 +26,7 @@ describe('Testing for signup endpoint', () => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('error').equal('"email address" is not allowed to be empty');
-            res.body.should.have.property('status').equal(400);
+            res.body.should.have.property('status').equal('error');
 
             done();
         });
@@ -47,7 +47,7 @@ describe('Testing for signup endpoint', () => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('error').equal('"address" is required');
-            res.body.should.have.property('status').equal(400);
+            res.body.should.have.property('status').equal('error');
 
             done();
         });
@@ -69,7 +69,7 @@ describe('Testing for signup endpoint', () => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('error').equal('"address" is not allowed to be empty');
-            res.body.should.have.property('status').equal(400);
+            res.body.should.have.property('status').equal('error');
 
             done();
         });
@@ -98,6 +98,7 @@ describe('Testing for signup endpoint', () => {
                 res.body.should.have
                     .property('error')
                     .equal('"first name" is required');
+                res.body.should.have.property('status').equal('error');
 
                 done();
             });
@@ -125,6 +126,7 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have.property('error').equal('"last name" is required');
+                res.body.should.have.property('status').equal('error');
 
                 done();
             });
@@ -153,7 +155,7 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have.property('error').equal('"first name" is not allowed to be empty');
-
+                res.body.should.have.property('status').equal('error');
                 done();
             });
     });
@@ -181,7 +183,7 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have.property('error').equal('"password" is not allowed to be empty');
-
+                res.body.should.have.property('status').equal('error');
                 done();
             });
     });
@@ -208,7 +210,7 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have.property('error').equal('"phone_number" is not allowed to be empty');
-
+                res.body.should.have.property('status').equal('error');
                 done();
             });
     });
@@ -234,7 +236,7 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have.property('error').equal('"phone_number" is required');
-
+                res.body.should.have.property('status').equal('error');
                 done();
             });
     });
@@ -264,7 +266,7 @@ describe('Testing for signup endpoint', () => {
                 res.should.have.status(400);
                 res.body.should.be.an('object');
                 res.body.should.have.property('error').equal('email already exist');
-
+                res.body.should.have.property('status').equal('error');
                 done();
             });
     });
@@ -273,7 +275,7 @@ describe('Testing for signup endpoint', () => {
     it('sign up user when all fields are provided', (done) => {
         const dataVal = {
 
-            email: 'test989@gmail.com',
+            email: 'test9810991@gmail.com',
 
             password: '1234567',
 
@@ -292,7 +294,7 @@ describe('Testing for signup endpoint', () => {
             .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
-                res.body.should.have.status(201);
+                res.body.should.have.status('success');
                 res.body.should.be.a('object');
                 res.body.should.have.property('data');
                 res.body.data.should.have.property('id');
@@ -303,7 +305,7 @@ describe('Testing for signup endpoint', () => {
                 res.body.data.should.have.property('address');
                 res.body.data.should.have.property('phone_number');
                 res.body.data.should.have.property('created_at');
-                res.body.should.have.property('status');
+
                 done();
             });
     });

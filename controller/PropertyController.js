@@ -23,7 +23,7 @@ class PropertyController {
         let schema = Validation.init().validateCreateProp();
         let clean = Joi.validate(req.body, schema);
         if (clean.error) {
-            return Response(400, res, clean.error.details[0].message);
+            return Response(res, 400, clean.error.details[0].message);
         }
         let ownerId = req.userData.id;
 
@@ -41,7 +41,7 @@ class PropertyController {
         } catch (err) {
 
 
-            return Response(500, res, "Internal server error");
+            return Response(res, 500, 'error', "Internal server error");
         }
 
 
@@ -50,14 +50,14 @@ class PropertyController {
 
         let propId = req.params.id;
         if (isNaN(propId)) {
-            return Response.onError(res, 400, 'invalid property number');
+            return Response.onError(res, 400, 'error', 'invalid property number');
         }
 
         let schema = Validation.init().validateCreateProp();
         let clean = Joi.validate(req.body, schema);
         if (clean.error) {
 
-            return Response.onError(res, 400, clean.error.details[0].message)
+            return Response.onError(res, 400, 'error', clean.error.details[0].message)
         }
 
         let { status, state, price, city } = clean.value;
@@ -66,11 +66,11 @@ class PropertyController {
         try {
 
             let result = await Property.init().update(propId, body);
-            return Response.onSuccess(res, 200, result.rows[0]);
+            return Response.onSuccess(res, 200, 'success', result.rows[0]);
 
         } catch (err) {
             // console.log(err.stack);
-            return Response.onError(res, 500, "Internal server error");
+            return Response.onError(res, 500, 'error', "Internal server error");
         }
 
     }
@@ -112,7 +112,7 @@ class PropertyController {
         let id = req.params.id;
 
         if (isNaN(id)) {
-            return Response.onError(res, 400, 'invalid property number');
+            return Response.onError(res, 400, 'error', 'invalid property number');
         }
 
 
@@ -122,11 +122,11 @@ class PropertyController {
             // console.log(found.rows[0]);
             if (typeof found.rows[0] === 'undefined') {
 
-                return Response.onError(res, 404, 'property does not exist');
+                return Response.onError(res, 404, 'error', 'property does not exist');
             }
 
             await Property.init().delete(id);
-            return Response.onSuccess(res, 200, 'property deleted succesfully');
+            return Response.onSuccess(res, 200, 'success', 'property deleted succesfully');
 
         } catch (err) {
             //return Response.onError(res, 500, 'internal server error');
@@ -160,7 +160,7 @@ class PropertyController {
 
         let id = req.params.id;
         if (isNaN(id)) {
-            return Response.onError(res, 400, 'invalid property number');
+            return Response.onError(res, 400, 'error', 'invalid property number');
         }
 
 
@@ -169,7 +169,7 @@ class PropertyController {
             const found = await Property.init().findById(id, '*');
             if (typeof found.rows[0] === 'undefined') {
 
-                return Response.onError(res, 404, 'property does not exist');
+                return Response.onError(res, 404, 'error', 'property does not exist');
             }
             const result = await Property.init().findById(id, '*');
 
@@ -178,13 +178,13 @@ class PropertyController {
 
 
             if (resultArray.length < 1) {
-                return Response.onSuccess(res, 200, 'result not found');
+                return Response.onSuccess(res, 200, 'success', 'result not found');
 
             }
-            return Response.onSuccess(res, 200, resultArray)
+            return Response.onSuccess(res, 200, 'success', resultArray)
         } catch (err) {
 
-            return Response.onError(res, 500, 'Internal server error');
+            return Response.onError(res, 500, 'error', 'Internal server error');
 
         }
 
@@ -197,15 +197,15 @@ class PropertyController {
         try {
             const found = await Property.init().find(body, '*');
             if (found.rows < 1) {
-                return Response.onSuccess(res, 200, "No record found");
+                return Response.onSuccess(res, 200, 'success', "No record found");
             }
 
-            return Response.onSuccess(res, 200, found.rows);
+            return Response.onSuccess(res, 200, 'success', found.rows);
 
         } catch (error) {
 
 
-            return Response.onError(res, 500, 'Internal server error');
+            return Response.onError(res, 500, 'error', 'Internal server error');
         }
 
 
