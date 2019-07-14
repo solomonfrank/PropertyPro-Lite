@@ -35,7 +35,7 @@ class Validation {
     }
 
     sanitizeName() {
-        return (Joi.string().trim().min(3).max(20).required());
+        return (Joi.string().trim().min(3).max(20));
     }
 
     validateUpdate() {
