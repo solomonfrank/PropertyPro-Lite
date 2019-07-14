@@ -52,12 +52,14 @@ class Validation {
             first_name: this.sanitizeName().label('first name'),
             last_name: this.sanitizeName().label('last name'),
             phone: Joi.string(),
-            state: joi.string(),
+            state: Joi.string(),
             zip: Joi.string(),
             country: Joi.string(),
             password: this.sanitizePassword(),
             phone_number: this.sanitizeName(),
             is_admin: Joi.boolean(),
+            street: Joi.string(),
+            city: Joi.string(),
 
             address: this.sanitizeName(),
 

@@ -41,7 +41,7 @@ class Db {
   phone VARCHAR(200) NULL,
   country VARCHAR(100) NULL,
   state VARCHAR(100) NULL,
-  
+  street VARCHAR(100) NULL,
     zip VARCHAR(100) NULL,
     city VARCHAR(100) NULL,
   created_at TIMESTAMP

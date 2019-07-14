@@ -37,7 +37,7 @@ class UserController {
             first_name, last_name, email, password, address, street, phone_number, phone, country, zip, state, city, is_admin
         } = clean.value;
 
-        console.log(req.body);
+
 
         const token = await Auth.generateToken(email);
         if (!token) {
