@@ -109,6 +109,7 @@ class Validation {
 
 
     async hashPassword(password) {
+        console.log(password);
         this.saltRounds = 10;
         this.plainPassword = password;
         try {
