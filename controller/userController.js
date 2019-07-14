@@ -26,12 +26,12 @@ class UserController {
     static async signup(req, res) {
         const schema = Validation.init().validateRegister();
         const clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            return Response.onError(res, 400, clean.error.details[0].message);
-        }
+        //if (clean.error) {
+        //return Response.onError(res, 400, clean.error.details[0].message);
+        //}
 
         const {
-            first_name, last_name, email, password, address
+            first_name, last_name, email, password, address, phone_number
         } = clean.value;
 
         const token = await Auth.generateToken(email);
@@ -39,7 +39,7 @@ class UserController {
             return Response.onError(res, 500, 'server could not generate token');
         }
         const body = {
-            first_name, last_name, email, password, token, address
+            first_name, last_name, email, password, token, address, phone_number
 
         };
         body.password = await Validation.init().hashPassword(password);

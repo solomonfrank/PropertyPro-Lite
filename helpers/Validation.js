@@ -47,11 +47,12 @@ class Validation {
 
     validateRegister() {
         this.schema = {
+            email: this.sanitizeEmail(),
             first_name: this.sanitizeName().label('first name'),
             last_name: this.sanitizeName().label('last name'),
-            email: this.sanitizeEmail(),
-            password: this.sanitizePassword(),
 
+            password: this.sanitizePassword(),
+            phone_number: this.sanitizePhone(),
 
             address: this.sanitizeName(),
 
