@@ -32,7 +32,7 @@ class UserController {
 
         const {
             first_name, last_name, email, gender, password, address, phoneNumber,
-        } = clean.value;
+            is_admin } = clean.value;
 
         const token = await Auth.generateToken(email);
         if (!token) {
@@ -40,6 +40,7 @@ class UserController {
         }
         const body = {
             first_name, last_name, email, gender, password, token, address, phoneNumber,
+            is_admin
         };
         body.password = await Validation.init().hashPassword(password);
         body.created_at = new Date();

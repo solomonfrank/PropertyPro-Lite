@@ -51,7 +51,7 @@ class Validation {
             last_name: this.sanitizeName().label('last name'),
             email: this.sanitizeEmail(),
             password: this.sanitizePassword(),
-
+            is_admin: Joi.boolean(),
             gender: this.sanitizeName(),
             address: this.sanitizeName(),
             phoneNumber: this.sanitizePhone(),
