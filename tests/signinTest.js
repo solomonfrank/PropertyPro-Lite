@@ -15,7 +15,7 @@ describe('Testing for signin endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signin')
+            .post('/auth/signin')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -38,7 +38,7 @@ describe('Testing for signin endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signin')
+            .post('/auth/signin')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -62,7 +62,7 @@ describe('Testing for signin endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signin')
+            .post('/auth/signin')
             .send(dataVal)
             .end((err, res) => {
                 // res.body.should.have.status(200);

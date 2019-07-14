@@ -14,7 +14,7 @@ describe('Testing for update specific property endpoint', () => {
             "password": "1234567"
         }
 
-        chai.request(app).post('/auth/api/v1/signin')
+        chai.request(app).post('/auth/signin')
             .send(valid_input)
             .end((err, response) => {
 
@@ -30,7 +30,7 @@ describe('Testing for update specific property endpoint', () => {
                     address: 'Lagos',
                     type: '2bedroom',
                 };
-                chai.request(app).patch(`/api/v1/property/${propId}`)
+                chai.request(app).patch(`/property/${propId}`)
                     .set('Authorization', `Bearer ${token}`)
                     .send(data)
                     .end((err, res) => {
@@ -73,7 +73,7 @@ describe('Testing for update specific property endpoint', () => {
         chai
             .request(app)
 
-            .patch(`/api/v1/property/${propId}`)
+            .patch(`/property/${propId}`)
 
             .send(data)
             .end((err, res) => {

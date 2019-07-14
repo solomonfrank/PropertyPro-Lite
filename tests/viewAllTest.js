@@ -18,7 +18,7 @@ describe('Testing for fetch all properties endpoint', () => {
         chai
             .request(app)
 
-            .get('/api/v1/property')
+            .get('/property')
 
             .send()
             .end((err, res) => {

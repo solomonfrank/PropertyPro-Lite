@@ -32,16 +32,16 @@ app.use(
     }),
 );
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
-app.post('/auth/api/v1/signup', UserController.signup);
-app.post('/auth/api/v1/signin', UserController.signin);
-app.post('/api/v1/create', Auth.verifyToken, PropertyController.create);
-app.patch('/api/v1/property/:id', Auth.verifyToken, PropertyController.update);
-app.patch('/api/v1/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
-app.delete('/api/v1/property/:id', Auth.verifyToken, PropertyController.delete);
-app.get('/api/v1/property/search', PropertyController.searchProperty);
-app.get('/api/v1/property/:id', PropertyController.getProperty);
-app.get('/api/v1/property', PropertyController.getAllProperty);
-app.post('/auth/api/v1/:email/reset_password', MailController.sendMail);
+app.post('/auth/signup', UserController.signup);
+app.post('/auth/signin', UserController.signin);
+app.post('/property', Auth.verifyToken, PropertyController.create);
+app.patch('/property/:id', Auth.verifyToken, PropertyController.update);
+app.patch('/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
+app.delete('/property/:id', Auth.verifyToken, PropertyController.delete);
+app.get('/property/search', PropertyController.searchProperty);
+app.get('/property/:id', PropertyController.getProperty);
+app.get('/property', PropertyController.getAllProperty);
+app.post('/auth/:email/reset_password', MailController.sendMail);
 
 
 

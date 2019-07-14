@@ -14,7 +14,7 @@ describe('Testing for update status property endpoint', () => {
             "password": "1234567"
         }
 
-        chai.request(app).post('/auth/api/v1/signin')
+        chai.request(app).post('/auth/signin')
             .send(validInput)
             .end((err, response) => {
 
@@ -27,7 +27,7 @@ describe('Testing for update status property endpoint', () => {
                     "status": "sold"
 
                 };
-                chai.request(app).patch(`/api/v1/property/${propId}/sold`)
+                chai.request(app).patch(`/property/${propId}/sold`)
                     .set('Authorization', `Bearer ${token}`)
                     .send(data)
                     .end((err, res) => {
@@ -67,7 +67,7 @@ describe('Testing for update status property endpoint', () => {
         chai
             .request(app)
 
-            .patch(`/api/v1/property/${propId}`)
+            .patch(`/property/${propId}`)
 
             .send(data)
             .end((err, res) => {
@@ -95,7 +95,7 @@ describe('Testing for update status property endpoint', () => {
         chai
             .request(app)
 
-            .patch(`/api/v1/property/${propId}/sold`)
+            .patch(`/property/${propId}/sold`)
             .set('Authorization', `Bearer ${token}`)
             .send(data)
             .end((err, res) => {

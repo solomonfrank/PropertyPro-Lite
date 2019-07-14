@@ -14,7 +14,7 @@ describe('Testing for create property endpoint', () => {
             "password": "1234567"
         }
         //send login request to the app to receive token
-        chai.request(app).post('/auth/api/v1/signin')
+        chai.request(app).post('/auth/signin')
             .send(valid_input)
             .end((err, response) => {
 
@@ -31,7 +31,7 @@ describe('Testing for create property endpoint', () => {
                     address: 'Lagos',
                     type: '2bedroom',
                 };
-                chai.request(app).post('/api/v1/create')
+                chai.request(app).post('/property')
                     .set('Authorization', `Bearer ${token}`)
                     .send(data)
                     .end((err, res) => {
@@ -74,7 +74,7 @@ describe('Testing for create property endpoint', () => {
         chai
             .request(app)
 
-            .post('/api/v1/create')
+            .post('/property')
 
             .send(data)
             .end((err, res) => {

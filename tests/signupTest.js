@@ -43,7 +43,7 @@ describe('Testing for signup endpoint', () => {
 
 
         };
-        chai.request(app).post('/auth/api/v1/signup').send(dataVal).end((err, res) => {
+        chai.request(app).post('/auth/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('data').equal('"address" is required');
@@ -65,7 +65,7 @@ describe('Testing for signup endpoint', () => {
 
 
         };
-        chai.request(app).post('/auth/api/v1/signup').send(dataVal).end((err, res) => {
+        chai.request(app).post('/auth/signup').send(dataVal).end((err, res) => {
             res.should.have.status(400);
             res.body.should.be.an('object');
             res.body.should.have.property('data').equal('"address" is not allowed to be empty');
@@ -88,7 +88,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -117,7 +117,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -145,7 +145,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -173,7 +173,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -200,7 +200,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -226,7 +226,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -254,7 +254,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -282,7 +282,7 @@ describe('Testing for signup endpoint', () => {
         };
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 // eslint-disable-next-line no-console
@@ -299,7 +299,7 @@ describe('Testing for signup endpoint', () => {
     it('sign up user when all fields are provided', (done) => {
         const dataVal = {
 
-            email: 'test90111@gmail.com',
+            email: 'test90s@gmail.com',
 
             password: '1234567',
             confirmPassword: '1234567',
@@ -315,7 +315,7 @@ describe('Testing for signup endpoint', () => {
 
         chai
             .request(app)
-            .post('/auth/api/v1/signup')
+            .post('/auth/signup')
             .send(dataVal)
             .end((err, res) => {
                 res.body.should.have.status(201);

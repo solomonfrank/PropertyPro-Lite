@@ -13,7 +13,7 @@ describe('Testing for view specific property endpoint', () => {
         chai
             .request(app)
 
-            .get(`/api/v1/property/${propId}`)
+            .get(`/property/${propId}`)
 
             .send()
             .end((err, res) => {
@@ -43,7 +43,7 @@ describe('Testing for view specific property endpoint', () => {
         chai
             .request(app)
 
-            .get(`/api/v1/property/${propId}`)
+            .get(`/property/${propId}`)
 
             .send()
             .end((err, res) => {
@@ -63,7 +63,7 @@ describe('Testing for view specific property endpoint', () => {
         chai
             .request(app)
 
-            .get(`/api/v1/property/${propId}`)
+            .get(`/property/${propId}`)
 
             .send()
             .end((err, res) => {
