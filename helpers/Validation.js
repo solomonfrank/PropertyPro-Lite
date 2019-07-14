@@ -15,7 +15,7 @@ class Validation {
 
 
     sanitizePassword() {
-        return (Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/));
+        return (Joi.string().min(5));
     }
 
     sanitizePhone() {
