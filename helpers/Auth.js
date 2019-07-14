@@ -20,6 +20,7 @@ const Auth = {
             return token;
 
         } catch (err) {
+            console.log(err.stack);
             return false;
 
         }
@@ -28,10 +29,9 @@ const Auth = {
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
         const bearerHead = req.headers.authorization || req.body.token;
-        console.log(bearerHead);
-        console.log('gead');
+
         if (typeof bearerHead === 'undefined') {
-            return Response.onError(res, 403, 'forbidden');
+            return Response.onError(res, 403, 'error', 'forbidden');
         }
         let tokenArray = bearerHead.split(' ');
         let token = tokenArray[1];
