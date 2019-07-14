@@ -28,7 +28,7 @@ class UserController {
         const schema = Validation.init().validateRegister();
         const clean = Joi.validate(req.body, schema);
         if (clean.error) {
-            return Response.onError(res, 401, 'error', clean.error.details[0].message);
+            return Response.onError(res, 201, 'error', clean.error.details[0].message);
         }
 
 
