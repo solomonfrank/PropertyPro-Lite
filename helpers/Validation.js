@@ -10,7 +10,7 @@ class Validation {
     }
 
     sanitizeEmail() {
-        return (Joi.string().email({ minDomainAtoms: 2 }).required().label('email address'));
+        return (Joi.string().required().label('email address'));
     }
 
 
