@@ -30,7 +30,7 @@ class UserController {
            // return Response.onError(res, 401, 'error', clean.error.details[0].message);
        // }
 
-        const {
+        let {
             first_name, last_name, email, password, address, phone_number
         } = req.body;
 
