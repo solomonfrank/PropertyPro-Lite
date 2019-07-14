@@ -1,7 +1,7 @@
 
 const Response = {
 
-    onSuccess(res, statusCode, responseText) {
+    onSuccess(res, statusCode, msg, responseText) {
         const value = responseText;
         if (value.password) {
             delete value.password;
@@ -10,17 +10,17 @@ const Response = {
 
 
         return (res.status(statusCode).json({
-            status: statusCode,
+            status: msg,
             data: value,
         })
         );
     },
 
-    onError(res, statusCode, responseText) {
+    onError(res, statusCode, msg, responseText) {
 
 
         return (res.status(statusCode).json({
-            status: statusCode,
+            status: msg,
             error: responseText,
         })
         );

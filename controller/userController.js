@@ -27,7 +27,7 @@ class UserController {
         const schema = Validation.init().validateRegister();
         const clean = Joi.validate(req.body, schema);
         if (clean.error) {
-            return Response.onError(res, 400, clean.error.details[0].message);
+            return Response.onError(res, 400, 'error', clean.error.details[0].message);
         }
 
         const {
@@ -36,7 +36,7 @@ class UserController {
 
         const token = await Auth.generateToken(email);
         if (!token) {
-            return Response.onError(res, 500, 'server could not generate token');
+            return Response.onError(res, 500, 'error', 'server could not generate token');
         }
         const body = {
             first_name, last_name, email, password, token, address, phone_number
@@ -56,7 +56,7 @@ class UserController {
 
 
             if (error.routine === '_bt_check_unique') {
-                return Response.onError(res, 400, 'email already exist');
+                return Response.onError(res, 400, 'error', 'email already exist');
             }
             // return Response.onError(res, 500, 'Internal server error');
             console.log(error.stack);
