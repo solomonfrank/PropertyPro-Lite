@@ -58,8 +58,9 @@ class UserController {
 
 
         try {
+            console.log('hi val')
             body.password = await Validation.init().hashPassword(password);
-
+            console.log('afte');
             //const result = await User.init().insert(body);
             return await User.init().insertAll(res, body);
 
