@@ -8,7 +8,7 @@ class Db {
     constructor() {
         this.conn = new Pool({
             connectionString,
-            ssl: true
+            // ssl: true
 
         });
 
@@ -31,11 +31,11 @@ class Db {
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(120) NOT NULL,
   last_name VARCHAR(120) NOT NULL,
-  gender VARCHAR (20) NULL,
+  
   email VARCHAR(120) UNIQUE NOT NULL,
   password VARCHAR(128) NULL,
-  phoneNumber VARCHAR(120) NULL,
-  address VARCHAR(128) NULL,
+  phone_number VARCHAR(120) NOT NULL,
+  address VARCHAR(128) NOT NULL,
   is_admin BOOLEAN DEFAULT FALSE,
   token TEXT  NULL,
   created_at TIMESTAMP

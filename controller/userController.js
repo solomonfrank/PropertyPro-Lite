@@ -31,16 +31,16 @@ class UserController {
         }
 
         const {
-            first_name, last_name, email, gender, password, address, phoneNumber,
-            is_admin } = clean.value;
+            first_name, last_name, email, password, address, phone_number,
+        } = clean.value;
 
         const token = await Auth.generateToken(email);
         if (!token) {
             return Response.onError(res, 500, 'server could not generate token');
         }
         const body = {
-            first_name, last_name, email, gender, password, token, address, phoneNumber,
-            is_admin
+            first_name, last_name, email, password, token, address, phone_number,
+
         };
         body.password = await Validation.init().hashPassword(password);
         body.created_at = new Date();

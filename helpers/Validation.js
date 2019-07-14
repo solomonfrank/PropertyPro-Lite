@@ -18,7 +18,7 @@ class Validation {
     }
 
     sanitizePhone() {
-        return Joi.number();
+        return Joi.number().required();
     }
 
 
@@ -34,7 +34,7 @@ class Validation {
     }
 
     sanitizeName() {
-        return (Joi.string().trim().min(3).max(20));
+        return (Joi.string().trim().min(3).max(20).required());
     }
 
     validateUpdate() {
@@ -51,10 +51,10 @@ class Validation {
             last_name: this.sanitizeName().label('last name'),
             email: this.sanitizeEmail(),
             password: this.sanitizePassword(),
-            is_admin: Joi.boolean(),
-            gender: this.sanitizeName(),
+
+
             address: this.sanitizeName(),
-            phoneNumber: this.sanitizePhone(),
+            phone_number: this.sanitizePhone(),
         };
 
 

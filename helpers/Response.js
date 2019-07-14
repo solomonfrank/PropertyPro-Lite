@@ -6,12 +6,7 @@ const Response = {
         if (value.password) {
             delete value.password;
         }
-        console.log(value.phonenumber);
-        if (value.phonenumber || value.phonenumber === null) {
-            value.phoneNumber = value.phonenumber;
-            delete value.phonenumber;
 
-        }
 
 
         return (res.status(statusCode).json({
