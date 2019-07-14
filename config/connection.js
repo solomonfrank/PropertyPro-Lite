@@ -38,6 +38,12 @@ class Db {
   address VARCHAR(128) NOT NULL,
   is_admin BOOLEAN DEFAULT FALSE,
   token TEXT  NULL,
+  phone VARCHAR(200) NULL,
+  country VARCHAR(100) NULL,
+  state VARCHAR(100) NULL,
+  
+    zip VARCHAR(100) NULL,
+    city VARCHAR(100) NULL,
   created_at TIMESTAMP
   
   

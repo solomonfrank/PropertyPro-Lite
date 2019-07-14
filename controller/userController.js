@@ -28,13 +28,14 @@ class UserController {
         const schema = Validation.init().validateRegister();
         const clean = Joi.validate(req.body, schema);
         if (clean.error) {
-            return Response.onError(res, 201, 'error', clean.error.details[0].message);
+            console.log(clean.error);
+            return Response.onError(res, 400, 'error', clean.error.details[0].message);
         }
 
 
         let {
-            first_name, last_name, email, password, address, phone_number
-        } = req.body;
+            first_name, last_name, email, password, address, street, phone_number, phone, country, zip, state, city, is_admin
+        } = clean.value;
 
         console.log(req.body);
 
@@ -43,7 +44,7 @@ class UserController {
             return Response.onError(res, 500, 'error', 'server could not generate token');
         }
         const body = {
-            first_name, last_name, email, password, token, address, phone_number
+            first_name, last_name, email, password, address, street, token, phone_number, phone, country, zip, state, city, is_admin
 
         };
         body.password = await Validation.init().hashPassword(password);
