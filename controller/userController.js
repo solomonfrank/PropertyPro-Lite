@@ -53,11 +53,12 @@ class UserController {
             first_name, last_name, email, password, address, street, token, phone_number, phone, country, zip, state, city, is_admin
 
         };
-        body.password = await Validation.init().hashPassword(password);
+
         body.created_at = new Date();
 
 
         try {
+            body.password = await Validation.init().hashPassword(password);
 
             //const result = await User.init().insert(body);
             return await User.init().insertAll(res, body);
