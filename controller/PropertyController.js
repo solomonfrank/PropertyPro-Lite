@@ -70,9 +70,7 @@ class PropertyController {
     static async update(req, res) {
 
         let propId = req.params.id;
-        if (isNaN(propId)) {
-            return Response.onError(res, 400, 'error', 'invalid property number');
-        }
+
 
         let schema = Validation.init().validateCreateProp();
         let clean = Joi.validate(req.body, schema);
