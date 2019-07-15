@@ -55,10 +55,10 @@ class PropertyController {
         body.image_url = req.image_url;
         let id = body.owner;
         console.log(id);
-
+        let searchBy = { id }
 
         try {
-            let found = await User.init().findById(id, '*');
+            let found = await User.init().find(searchBy, '*');
             console.log(found.rows[0].owner_email);
             body.owner_email = found.rows[0].owner_email;
             console.log(body);
