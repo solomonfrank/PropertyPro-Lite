@@ -29,30 +29,27 @@ const Auth = {
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
         console.log(req.body);
-        if ((Object.keys(req.body).length) < 1) {
-            return Response.onError(res, 400, 'error', 'fields are required');
-        }
-        if (!req.body.status) {
-            return Response.onError(res, 400, 'error', 'fields are required');
-        }
-        const bearerHead = req.headers.authorization || req.body.token;
-
-        if (typeof bearerHead === 'undefined') {
-            return Response.onError(res, 403, 'error', 'forbidden');
-        }
-        let tokenArray = bearerHead.split(' ');
-        let token = tokenArray[1];
-        console.log(token)
 
 
-
-
-        // token = token.trim();
-
-        if (!token) {
-            return Response.onError(res, 403, 'Not authorize to access the page');
-        }
         try {
+            const bearerHead = req.headers.authorization || req.body.token;
+
+            if (typeof bearerHead === 'undefined') {
+                return Response.onError(res, 403, 'error', 'forbidden');
+            }
+            let tokenArray = bearerHead.split(' ');
+            let token = tokenArray[1];
+            console.log(token)
+
+
+
+
+            // token = token.trim();
+
+            if (!token) {
+                return Response.onError(res, 403, 'Not authorize to access the page');
+            }
+
             const decoded = await jwt.verify(token, process.env.SECRET_KEY);
 
 
