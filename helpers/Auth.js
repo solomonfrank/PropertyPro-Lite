@@ -30,7 +30,7 @@ const Auth = {
 
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
-        console.log(req)
+
         let token = req.token;
         console.log(token);
         try {
@@ -62,7 +62,7 @@ const Auth = {
             }
 
             console.log(params);
-            req.id = params;
+            req.userData = params;
 
             next();
         } catch (err) {
@@ -81,9 +81,9 @@ const Auth = {
             if (typeof bearerHead === 'undefined') {
                 return Response.onError(res, 403, 'error', 'forbidden');
             }
-            // let tokenArray = bearerHead.split(' ');
-            //  let token = tokenArray[1];
-            req.token = bearerHead;
+            let tokenArray = bearerHead.split(' ');
+            let token = tokenArray[1];
+            req.token = token;
             console.log(req.token);
             next();
         } catch (error) {

@@ -36,8 +36,9 @@ class PropertyController {
         //let { price, status, state, city, address, type, image_url } = clean.value;
 
 
-
+        console.log(req.userData)
         console.log(req.body);
+        console.log(req.image_url);
 
 
 
