@@ -67,8 +67,8 @@ const Auth = {
             console.log(req.userData);
             next();
         } catch (err) {
-            // return Response.onError(res, 403, 'invalid token provided');
-            console.log(err.stack);
+            return Response.onError(res, 403, 'invalid token provided');
+            // console.log(err.stack);
         }
     },
 };

@@ -19,22 +19,23 @@ app.use(
 class PropertyController {
 
     static async create(req, res) {
-
+        console.log(req.body);
         let schema = Validation.init().validateCreateProp();
         let clean = Joi.validate(req.body, schema);
         if (clean.error) {
-            return Response(res, 400, clean.error.details[0].message);
+            return Response(res, 400, 'error', clean.error.details[0].message);
         }
         console.log(req.userData.id);
         let ownerId = req.userData.id;
 
 
-        let { price, state, city, address, type, imge_url } = clean.value;
-        let body = { price, state, city, address, type };
-        body.owner = ownerId;
-        body.created_on = new Date();
+
 
         try {
+            let { price, state, city, address, type, image_url } = clean.value;
+            let body = { price, state, city, address, type, image_url };
+            body.owner = ownerId;
+            body.created_on = new Date();
 
             return await Property.init().insertAll(res, body);
 
