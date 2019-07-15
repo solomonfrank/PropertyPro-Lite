@@ -43,20 +43,21 @@ class PropertyController {
 
 
 
-        let { price, status, state, city, address, type } = req.body;
-        if (!price || !status || !type || !address || !state || !city) {
+        let { price, state, city, address, type } = req.body;
+        if (!price || !type || !address || !state || !city) {
             return Response.onError(res, 400, 'error', 'fields are required');
         }
-        let ownerId = req.userData.id;
 
 
-        //let body = { price, status, state, city, address, type, image_url };
-        req.body.owner = ownerId;
-        req.body.created_on = new Date();
-        req.body.image_url = req.image_url;
-        console.log(req.body);
+
+        let body = { price, state, city, address, type };
+        body.status = "available";
+        body.owner = req.userData.id;
+        body.created_on = new Date();
+        let image_url = req.image_url;
+
         try {
-            return await Property.init().insertAll(res, req.body);
+            return await Property.init().insertAll(res, body);
 
             // let result = await Property.init().insert(body);
             // return Response.onSuccess(res, 201, result.rows[0]);
