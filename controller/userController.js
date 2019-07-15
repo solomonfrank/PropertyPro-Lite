@@ -90,6 +90,7 @@ class UserController {
         // const { email, password } = clean.value;
 
         //const body = { email };
+        console.log(req.body);
         const {
             email, password,
         } = req.body;
@@ -102,7 +103,8 @@ class UserController {
 
         try {
 
-            const result = await User.init().findByEmail(req.body);
+            const result = await User.init().findByEmail(email);
+            console.log(result);
 
             if (!result.rows[0]) {
                 return Response.onError(res, 400, 'error', 'invalid credential');
