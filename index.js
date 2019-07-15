@@ -12,7 +12,7 @@ import Db from './config/connection';
 import MailController from './config/Mail';
 import { resolve } from 'path';
 
-import { uploader, cloudinaryConfig } from './config/cloudinaryConfig'
+import { uploader, cloudinaryConfig } from './config/cloudinaryConfig';
 import { multerUploads, dataUri } from './config/multer';
 
 // app.use(express.static(resolve(__dirname, 'src/public')));
@@ -41,14 +41,14 @@ app.use(
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.post('/auth/signup', UserController.signup);
 app.post('/auth/signin', UserController.signin);
-app.post('/property', Auth.verifyToken, multerUploads, PropertyController.create);
-//app.patch('/property/:id', Auth.verifyToken, PropertyController.update);
-//app.patch('/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
-//app.delete('/property/:id', Auth.verifyToken, PropertyController.delete);
-// app.get('/property/search', PropertyController.searchProperty);
-// app.get('/property/:id', PropertyController.getProperty);
-// app.get('/property', PropertyController.getAllProperty);
-// app.post('/auth/:email/reset_password', MailController.sendMail);
+app.post('/property', Auth.verifyToken, multerUploads, cloudinaryHandler, PropertyController.create);
+app.patch('/property/:id', Auth.verifyToken, PropertyController.update);
+app.patch('/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
+app.delete('/property/:id', Auth.verifyToken, PropertyController.delete);
+app.get('/property/search', PropertyController.searchProperty);
+app.get('/property/:id', PropertyController.getProperty);
+app.get('/property', PropertyController.getAllProperty);
+app.post('/auth/:email/reset_password', MailController.sendMail);
 
 
 

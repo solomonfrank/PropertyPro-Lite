@@ -21,23 +21,9 @@ app.use(
 class PropertyController {
 
     static async create(req, res) {
-        let image
-        if (req.file) {
-            try {
-                const file = dataUri(req).content;
-                let result = await uploader.upload(file);
-                image = result.url;
 
-            } catch (error) {
-                console.log(error.stack);
-                return Response.onError(res, 400, 'error', 'image is required');
-            }
 
-        }
-        let { price, status, state, city, address, type } = req.body;
-        if (!price || !status || !type || !image_url || !address || !state || !city) {
-            return Response.onError(res, 400, 'error', 'fields are required');
-        }
+
         //  if ((Object.keys(req.body).length < 1)) {
         //  console.log('yes')
         // return Response.onError(res, 400, 'error', 'fields are required');
@@ -49,18 +35,33 @@ class PropertyController {
         //}
         //let { price, status, state, city, address, type, image_url } = clean.value;
 
-        let ownerId = req.userData.id;
 
-
-        let body = { price, status, state, city, address, type, image_url };
-        body.owner = ownerId;
-        body.created_on = new Date();
-
-
+        console.log(req.file);
+        console.log(req.body);
         try {
 
+            if (req.file) {
 
-            return await Property.init().insertAll(res, body);
+                const file = dataUri(req).content;
+                let result = await uploader.upload(file);
+                req.body.image_url = result.url;
+
+
+
+            }
+
+            let { price, status, state, city, address, type } = req.body;
+            if (!price || !status || !type || !address || !state || !city) {
+                return Response.onError(res, 400, 'error', 'fields are required');
+            }
+            let ownerId = req.userData.id;
+
+
+            //let body = { price, status, state, city, address, type, image_url };
+            req.body.owner = ownerId;
+            req.body.created_on = new Date();
+            console.log(req.body);
+            return await Property.init().insertAll(res, req.body);
 
             // let result = await Property.init().insert(body);
             // return Response.onSuccess(res, 201, result.rows[0]);

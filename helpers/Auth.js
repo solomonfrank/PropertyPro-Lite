@@ -3,6 +3,8 @@
 import jwt from 'jsonwebtoken';
 import Response from './Response';
 import dotenv from 'dotenv';
+import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
+import { multerUploads, dataUri } from '..multer/config/multer'
 dotenv.config();
 
 
@@ -96,6 +98,30 @@ const Auth = {
             console.log(errors.stack);
         }
 
+    },
+    async cloudinaryHandler(req, res, next) {
+
+
+        if (req.file !== undefined) {
+
+
+            console.log(req.file)
+
+            try {
+                const file = dataUri(req).content;
+                let result = await uploader.upload(file);
+
+
+                req.Image_url = result.url;
+
+                next();
+            } catch (err) {
+                console.log(err.stack);
+            }
+        } else {
+            console.log(req.file)
+            next();
+        }
     },
 };
 export default Auth;
