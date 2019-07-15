@@ -24,7 +24,7 @@ app.use(
 class UserController {
 
     static async signup(req, res) {
-        console.log(req.body);
+
         //const schema = Validation.init().validateRegister();
         //const clean = Joi.validate(req.body, schema);
         //if (clean.error) {
@@ -45,16 +45,13 @@ class UserController {
         }
 
         const token = await Auth.generateToken(email);
-        console.log(token);
+
         if (!token) {
 
             return Response.onError(res, 500, 'error', 'server could not generate token');
         }
 
-        //const body = {
-        // first_name, last_name, email, password, address, street, token, phone_number, phone, country, zip, state, city, is_admin
 
-        // };
 
 
         req.body.created_at = new Date();
@@ -62,11 +59,9 @@ class UserController {
 
 
         try {
-            console.log('hi val')
-            console.log(password);
+
             req.body.password = await Validation.init().hashPassword(password);
-            console.log(req.body.password);
-            console.log('afte');
+
             //const result = await User.init().insert(body);
             return await User.init().insertAll(res, req.body);
 
@@ -77,8 +72,8 @@ class UserController {
             if (error.routine === '_bt_check_unique') {
                 return Response.onError(res, 400, 'error', 'email already exist');
             }
-            // return Response.onError(res, 500, 'Internal server error');
-            console.log(error.stack);
+            return Response.onError(res, 500, 'Internal server error');
+
 
         }
 
@@ -87,19 +82,27 @@ class UserController {
     }
 
     static async signin(req, res) {
-        const schema = Validation.init().validateSignin();
-        const clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            return Response.onError(res, 400, 'error', clean.error.details[0].message);
+        // const schema = Validation.init().validateSignin();
+        //const clean = Joi.validate(req.body, schema);
+        //if (clean.error) {
+        // return Response.onError(res, 400, 'error', clean.error.details[0].message);
+        //  }
+        // const { email, password } = clean.value;
+
+        //const body = { email };
+        const {
+            email, password,
+        } = req.body;
+        if (!Validation.init().emailIsValid(email)) {
+            return Response.onError(res, 400, 'error', "email address is invalid");
         }
-        const { email, password } = clean.value;
-
-        const body = { email };
-
+        if (!password || !email) {
+            return Response.onError(res, 400, 'error', "some fields are required");
+        }
 
         try {
 
-            const result = await User.init().findByEmail(body);
+            const result = await User.init().findByEmail(req.body);
 
             if (!result.rows[0]) {
                 return Response.onError(res, 400, 'error', 'invalid credential');
@@ -107,7 +110,7 @@ class UserController {
             const hashPassword = result.rows[0].password;
             const pass = await Validation.init().verifyPassword(password, hashPassword);
             if (!pass) {
-                return Response.onError(res, 400, 'success', 'invalid email or password');
+                return Response.onError(res, 400, 'error', 'invalid email or password');
             }
             const payload = {
                 id: result.rows[0].id,
