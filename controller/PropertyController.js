@@ -20,11 +20,14 @@ class PropertyController {
 
     static async create(req, res) {
         console.log(req.body);
-        let schema = Validation.init().validateCreateProp();
-        let clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            return Response(res, 400, 'error', clean.error.details[0].message);
+        if (Object.keys(req.body).length < 1) {
+            return Response.onSuccess(res, 201, 'error', 'fields are required');
         }
+        // let schema = Validation.init().validateCreateProp();
+        // let clean = Joi.validate(req.body, schema);
+        // if (clean.error) {
+        // return Response(res, 400, 'error', clean.error.details[0].message);
+        // }
         console.log(req.userData.id);
         let ownerId = req.userData.id;
 
@@ -32,7 +35,7 @@ class PropertyController {
 
 
         try {
-            let { price, state, city, address, type, image_url } = clean.value;
+            let { price, state, city, address, type, image_url } = req.body;
             let body = { price, state, city, address, type, image_url };
             body.owner = ownerId;
             body.created_on = new Date();
@@ -40,7 +43,7 @@ class PropertyController {
             return await Property.init().insertAll(res, body);
 
             // let result = await Property.init().insert(body);
-            //  return Response.onSuccess(res, 201, result.rows[0]);
+            // return Response.onSuccess(res, 201, result.rows[0]);
 
         } catch (err) {
 
