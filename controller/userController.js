@@ -102,14 +102,16 @@ class UserController {
         }
 
         try {
-
-            const result = await User.init().findByEmail(email);
+            console.log('oooooo');
+            let body = { email };
+            const result = await User.init().findByEmail(body);
             console.log(result);
 
             if (!result.rows[0]) {
                 return Response.onError(res, 400, 'error', 'invalid credential');
             }
             const hashPassword = result.rows[0].password;
+            console.log('yyyyy')
             const pass = await Validation.init().verifyPassword(password, hashPassword);
             if (!pass) {
                 return Response.onError(res, 400, 'error', 'invalid email or password');
