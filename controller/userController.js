@@ -58,6 +58,7 @@ class UserController {
 
 
         req.body.created_at = new Date();
+        req.body.token = token;
 
 
         try {
