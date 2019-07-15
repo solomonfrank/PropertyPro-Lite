@@ -28,7 +28,7 @@ const Auth = {
 
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
-        console.log(req.body);
+
 
 
         try {

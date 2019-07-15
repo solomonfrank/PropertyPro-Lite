@@ -19,8 +19,13 @@ app.use(
 class PropertyController {
 
     static async create(req, res) {
+
+        let { price, status, state, city, address, type, image_url } = req.body;
+        console.log(state);
+        console.log(status);
         console.log(req.body);
-        if (Object.keys(req.body).length < 1) {
+        if ((Object.keys(req.body).length < 1)) {
+            console.log('yes')
             return Response.onError(res, 400, 'error', 'fields are required');
         }
         // let schema = Validation.init().validateCreateProp();
@@ -31,14 +36,14 @@ class PropertyController {
         console.log(req.userData.id);
         let ownerId = req.userData.id;
 
-
+        let { price, status, state, city, address, type, image_url } = req.body;
+        let body = { price, status, state, city, address, type, image_url };
+        body.owner = ownerId;
+        body.created_on = new Date();
 
 
         try {
-            let { price, state, city, address, type, image_url } = req.body;
-            let body = { price, state, city, address, type, image_url };
-            body.owner = ownerId;
-            body.created_on = new Date();
+
 
             return await Property.init().insertAll(res, body);
 
