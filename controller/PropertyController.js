@@ -72,7 +72,7 @@ class PropertyController {
         let propId = req.params.id;
         console.log(req.body);
 
-        console.log(propid)
+        console.log(propId)
         // let schema = Validation.init().validateCreateProp();
         //let clean = Joi.validate(req.body, schema);
         //if (clean.error) {
