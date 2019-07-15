@@ -105,22 +105,22 @@ const Auth = {
         if (req.file !== undefined) {
 
 
-            console.log(req.file)
+
 
             try {
                 const file = dataUri(req).content;
                 let result = await uploader.upload(file);
 
 
-                req.Image_url = result.url;
+                req.image_url = result.url;
 
                 next();
             } catch (err) {
                 console.log(err.stack);
             }
         } else {
-            console.log(req.file)
-            next();
+            return Response.onError(res, 400, 'error', 'fields are required');
+
         }
     },
 };

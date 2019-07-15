@@ -36,31 +36,25 @@ class PropertyController {
         //let { price, status, state, city, address, type, image_url } = clean.value;
 
 
-        console.log(req.file);
+
+        console.log(req.body);
+
+
+
+
+        let { price, status, state, city, address, type } = req.body;
+        if (!price || !status || !type || !address || !state || !city) {
+            return Response.onError(res, 400, 'error', 'fields are required');
+        }
+        let ownerId = req.userData.id;
+
+
+        //let body = { price, status, state, city, address, type, image_url };
+        req.body.owner = ownerId;
+        req.body.created_on = new Date();
+        req.body.image_url = req.image_url;
         console.log(req.body);
         try {
-
-            if (req.file) {
-
-                const file = dataUri(req).content;
-                let result = await uploader.upload(file);
-                req.body.image_url = result.url;
-
-
-
-            }
-
-            let { price, status, state, city, address, type } = req.body;
-            if (!price || !status || !type || !address || !state || !city) {
-                return Response.onError(res, 400, 'error', 'fields are required');
-            }
-            let ownerId = req.userData.id;
-
-
-            //let body = { price, status, state, city, address, type, image_url };
-            req.body.owner = ownerId;
-            req.body.created_on = new Date();
-            console.log(req.body);
             return await Property.init().insertAll(res, req.body);
 
             // let result = await Property.init().insert(body);
