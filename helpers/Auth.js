@@ -31,16 +31,9 @@ const Auth = {
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
 
-
-
+        let token = req.token;
         try {
-            const bearerHead = req.headers.authorization || req.body.token;
 
-            if (typeof bearerHead === 'undefined') {
-                return Response.onError(res, 403, 'error', 'forbidden');
-            }
-            let tokenArray = bearerHead.split(' ');
-            let token = tokenArray[1];
 
 
 
@@ -67,8 +60,8 @@ const Auth = {
                 return Response.onError(res, 400, 'invalid token provided');
             }
 
-
-            req.token = params;
+            console.log(params);
+            req.id = params;
 
             next();
         } catch (err) {
@@ -103,10 +96,7 @@ const Auth = {
 
 
 
-        const decoded = await jwt.verify(token, process.env.SECRET_KEY);
 
-
-        const { id } = decoded.key;
 
 
     },
