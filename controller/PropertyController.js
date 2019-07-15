@@ -6,6 +6,7 @@ import Validation from '../helpers/Validation';
 import Auth from '../helpers/Auth';
 import Response from '../helpers/Response';
 import Property from '../model/Property';
+import User from '../model/User';
 import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
 import { multerUploads, dataUri } from '../config/multer';
 
