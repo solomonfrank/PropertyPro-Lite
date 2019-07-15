@@ -16,6 +16,7 @@ class Model {
         this.id = id;
 
         this.sql = `SELECT  ${this.field} FROM ${this._table} WHERE id = $1`;
+        console.log(this.sql);
 
         const client = await pool;
 
@@ -31,6 +32,7 @@ class Model {
 
 
         this.sql = `SELECT ${this.field} FROM ${this.table} WHERE ${this.fieldName} = $1 `;
+        console.log(this.sql);
         const client = await pool;
         return client.query(`${this.sql}`, this.fieldValue);
     }

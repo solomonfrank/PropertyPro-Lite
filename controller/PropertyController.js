@@ -115,18 +115,20 @@ class PropertyController {
         // return Response.onError(res, 400, clean.error.details[0].message);
         // }
         console.log(req.body);
-        let { status } = req.body;
-        let body = { status }
-
+        // let { status } = req.body;
+        //  let body = { status }
+        let cBody = { status: "sold" }
 
 
         try {
 
             let found = await Property.init().findById(id, '*');
+            console.log('kkekek');
+            console.log(found.rows[0]);
             if (!found.rows[0]) {
                 return Response.onError(res, 404, 'Property does not exist');
             }
-            let result = await Property.init().update(id, body);
+            let result = await Property.init().update(id, cBody);
             return Response.onSuccess(res, 200, result.rows[0]);
         }
         catch (err) {
