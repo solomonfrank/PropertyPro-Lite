@@ -109,14 +109,14 @@ class Validation {
 
 
     async hashPassword(password) {
-        console.log(password);
+
         this.saltRounds = 10;
         // this.plainPassword = password;
         console.log(password)
         try {
             return bcrypt.hash(password, 10);
         } catch (err) {
-            console.log('hello')
+
             console.log(err.stack);
         }
 
