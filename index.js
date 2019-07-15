@@ -34,7 +34,7 @@ app.use(
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.post('/auth/signup', UserController.signup);
 app.post('/auth/signin', UserController.signin);
-app.post('/property', Auth.verifyToken, PropertyController.create);
+app.post('/property', Auth.verifyToken, Auth.verifyField, PropertyController.create);
 //app.patch('/property/:id', Auth.verifyToken, PropertyController.update);
 //app.patch('/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
 //app.delete('/property/:id', Auth.verifyToken, PropertyController.delete);

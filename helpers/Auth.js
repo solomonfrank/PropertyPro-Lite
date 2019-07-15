@@ -74,5 +74,28 @@ const Auth = {
             // console.log(err.stack);
         }
     },
+    async verifyField(req, res, next) {
+
+        try {
+            //dataUris(req);
+            //dataUri(req);
+            const { property_name, status, price, state, city, type } = req.body;
+            //const image = req.file;
+            //const image = req.file;
+
+
+            if (status && city && state && property_name && price && image && type) {
+
+                next();
+            } else {
+                res.status(403).json({ status: 403, error: 'please fill all filled correctly' });
+            }
+        }
+        catch (errors) {
+            //res.status(403).json({status:403,error:'please fill all filled correctly and upload an image'});
+            console.log(errors.stack);
+        }
+
+    },
 };
 export default Auth;
