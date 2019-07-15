@@ -54,7 +54,7 @@ class PropertyController {
         body.status = "available";
         body.owner = req.userData.id;
         body.created_on = new Date();
-        let image_url = req.image_url;
+        body.image_url = req.image_url;
 
         try {
             return await Property.init().insertAll(res, body);
