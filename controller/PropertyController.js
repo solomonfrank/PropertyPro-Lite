@@ -106,6 +106,7 @@ class PropertyController {
         // if (clean.error) {
         // return Response.onError(res, 400, clean.error.details[0].message);
         // }
+        console.log(req.body);
         let { status } = req.body;
         let body = { status }
 
@@ -131,9 +132,7 @@ class PropertyController {
 
         let id = req.params.id;
 
-        if (isNaN(id)) {
-            return Response.onError(res, 400, 'error', 'invalid property number');
-        }
+
 
 
         try {
@@ -146,7 +145,7 @@ class PropertyController {
             }
 
             await Property.init().delete(id);
-            return Response.onSuccess(res, 200, 'success', 'property deleted succesfully');
+            return Response.onSuccess(res, 200, 'success', { message: "property deleted succesfully" });
 
         } catch (err) {
             //return Response.onError(res, 500, 'internal server error');
@@ -165,13 +164,13 @@ class PropertyController {
             let resultArray = result.rows;
 
             if (resultArray.length < 1) {
-                return Response.onSuccess(res, 200, 'result not found');
+                return Response.onSuccess(res, 200, 'succes', 'result not found');
 
             }
-            return Response.onSuccess(res, 200, resultArray)
+            return Response.onSuccess(res, 200, 'success', resultArray)
         } catch (err) {
 
-            return Response.onError(res, 200, 'Internal server error');
+            return Response.onError(res, 500, 'error', 'Internal server error');
         }
 
     }
