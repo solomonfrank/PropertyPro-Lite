@@ -70,18 +70,19 @@ class PropertyController {
     static async update(req, res) {
 
         let propId = req.params.id;
+        console.log(req.body);
 
+        console.log(propid)
+        // let schema = Validation.init().validateCreateProp();
+        //let clean = Joi.validate(req.body, schema);
+        //if (clean.error) {
 
-        let schema = Validation.init().validateCreateProp();
-        let clean = Joi.validate(req.body, schema);
-        if (clean.error) {
+        //return Response.onError(res, 400, 'error', clean.error.details[0].message)
+        //}
 
-            return Response.onError(res, 400, 'error', clean.error.details[0].message)
-        }
+        let { price } = req.body;
 
-        let { status, state, price, city } = clean.value;
-
-        let body = { state, status, price, city };
+        let body = { price };
         try {
 
             let result = await Property.init().update(propId, body);
@@ -97,15 +98,15 @@ class PropertyController {
     static async updateStatus(req, res) {
 
         let id = req.params.id;
-        if (isNaN(id)) {
-            return Response.onError(res, 400, 'invalid property number');
-        }
-        let schema = Validation.init().validateUpdate();
-        let clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            return Response.onError(res, 400, clean.error.details[0].message);
-        }
-        let { status } = clean.value;
+        // if (isNaN(id)) {
+        //  return Response.onError(res, 400, 'invalid property number');
+        //  }
+        //  let schema = Validation.init().validateUpdate();
+        // let clean = Joi.validate(req.body, schema);
+        // if (clean.error) {
+        // return Response.onError(res, 400, clean.error.details[0].message);
+        // }
+        let { status } = req.body;
         let body = { status }
 
 
