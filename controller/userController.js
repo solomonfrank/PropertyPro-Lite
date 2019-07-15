@@ -37,14 +37,15 @@ class UserController {
             first_name, last_name, email, password, address, street, phone_number, phone, country, zip, state, city, is_admin
         } = req.body;
 
-        //  if (!Validation.init().emailIsValid(email)) {
-        // return Response.onError(res, 400, 'error', "email address is invalid");
-        // }
-        //  if (!password || !email) {
-        // return Response.onError(res, 400, 'error', "some fields are required");
-        //}
+        if (!Validation.init().emailIsValid(email)) {
+            return Response.onError(res, 400, 'error', "email address is invalid");
+        }
+        if (!password || !email) {
+            return Response.onError(res, 400, 'error', "some fields are required");
+        }
 
         const token = await Auth.generateToken(email);
+        console.log(token);
         if (!token) {
 
             return Response.onError(res, 500, 'error', 'server could not generate token');
@@ -61,6 +62,7 @@ class UserController {
 
         try {
             console.log('hi val')
+            console.log(password);
             req.body.password = await Validation.init().hashPassword(password);
             console.log(req.body.password);
             console.log('afte');

@@ -112,7 +112,7 @@ class Validation {
         console.log(password);
         this.saltRounds = 10;
         // this.plainPassword = password;
-        console.log()
+        console.log(password)
         try {
             return bcrypt.hash(password, 10);
         } catch (err) {
