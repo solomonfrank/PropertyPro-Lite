@@ -30,8 +30,9 @@ const Auth = {
 
     // eslint-disable-next-line consistent-return
     async verifyToken(req, res, next) {
-
+        console.log(req)
         let token = req.token;
+        console.log(token);
         try {
 
 
@@ -42,7 +43,7 @@ const Auth = {
             // token = token.trim();
 
             if (!token) {
-                return Response.onError(res, 403, 'Not authorize to access the page');
+                return Response.onError(res, 403, 'error', 'Not authorize to access the page');
             }
 
             const decoded = await jwt.verify(token, process.env.SECRET_KEY);
@@ -57,7 +58,7 @@ const Auth = {
 
 
             if (!result.rows[0]) {
-                return Response.onError(res, 400, 'invalid token provided');
+                return Response.onError(res, 400, 'error', 'invalid token provided');
             }
 
             console.log(params);
@@ -65,7 +66,7 @@ const Auth = {
 
             next();
         } catch (err) {
-            return Response.onError(res, 403, 'invalid token provided');
+            return Response.onError(res, 403, 'error', 'invalid token provided');
             // console.log(err.stack);
         }
     },
@@ -75,14 +76,14 @@ const Auth = {
 
 
         try {
-            const bearerHead = req.headers.Authorization || req.body.token || req.body.Authorization;
-
+            const bearerHead = req.header('Authorization') || req.body.token;
+            console.log(bearerHead);
             if (typeof bearerHead === 'undefined') {
                 return Response.onError(res, 403, 'error', 'forbidden');
             }
-            let tokenArray = bearerHead.split(' ');
-            let token = tokenArray[1];
-            req.token = token;
+            // let tokenArray = bearerHead.split(' ');
+            //  let token = tokenArray[1];
+            req.token = bearerHead;
             console.log(req.token);
             next();
         } catch (error) {
