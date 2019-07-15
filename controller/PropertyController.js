@@ -36,7 +36,7 @@ class PropertyController {
         console.log(req.userData.id);
         let ownerId = req.userData.id;
 
-        let { price, status, state, city, address, type, image_url } = req.body;
+
         let body = { price, status, state, city, address, type, image_url };
         body.owner = ownerId;
         body.created_on = new Date();
