@@ -21,7 +21,7 @@ class PropertyController {
     static async create(req, res) {
         console.log(req.body);
         if (Object.keys(req.body).length < 1) {
-            return Response.onSuccess(res, 201, 'error', 'fields are required');
+            return Response.onError(res, 400, 'error', 'fields are required');
         }
         // let schema = Validation.init().validateCreateProp();
         // let clean = Joi.validate(req.body, schema);

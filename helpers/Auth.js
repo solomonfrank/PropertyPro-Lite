@@ -30,7 +30,10 @@ const Auth = {
     async verifyToken(req, res, next) {
         console.log(req.body);
         if ((Object.keys(req.body).length) < 1) {
-            return Response.onSuccess(res, 201, 'error', 'fields are required');
+            return Response.onError(res, 400, 'error', 'fields are required');
+        }
+        if (!req.body.status) {
+            return Response.onError(res, 400, 'error', 'fields are required');
         }
         const bearerHead = req.headers.authorization || req.body.token;
 
