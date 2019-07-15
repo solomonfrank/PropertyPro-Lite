@@ -42,9 +42,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 app.post('/auth/signup', UserController.signup);
 app.post('/auth/signin', UserController.signin);
 app.post('/property', multerUploads, Auth.cloudinaryHandler, Auth.Authorization, Auth.verifyToken, PropertyController.create);
-app.patch('/property/:id', Auth.verifyToken, PropertyController.update);
-app.patch('/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
-app.delete('/property/:id', Auth.verifyToken, PropertyController.delete);
+app.patch('/property/:id', Auth.Authorization, Auth.verifyToken, PropertyController.update);
+app.patch('/property/:id/sold', Auth.Authorization, Auth.verifyToken, PropertyController.updateStatus);
+app.delete('/property/:id', Auth.Authorization, Auth.verifyToken, PropertyController.delete);
 app.get('/property/search', PropertyController.searchProperty);
 app.get('/property/:id', PropertyController.getProperty);
 app.get('/property', PropertyController.getAllProperty);

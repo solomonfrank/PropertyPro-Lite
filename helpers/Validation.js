@@ -76,12 +76,12 @@ class Validation {
 
 
 
-            price: Joi.number().required(),
-            state: this.sanitizeName(),
-            city: this.sanitizeName(),
-            address: this.sanitizeName(),
-            type: this.sanitizeName(),
-            imge_url: Joi.string(),
+            price: Joi.string().required(),
+            // state: this.sanitizeName(),
+            // city: this.sanitizeName(),
+            //address: this.sanitizeName(),
+            //type: this.sanitizeName(),
+            //imge_url: Joi.string(),
 
 
         };
