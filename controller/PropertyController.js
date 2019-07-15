@@ -19,12 +19,12 @@ app.use(
 class PropertyController {
 
     static async create(req, res) {
-
-        let schema = Validation.init().validateCreateProp();
-        let clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            return Response(res, 400, clean.error.details[0].message);
-        }
+        console.log(req.body);
+        // let schema = Validation.init().validateCreateProp();
+        //let clean = Joi.validate(req.body, schema);
+        // if (clean.error) {
+        //return Response(res, 400, clean.error.details[0].message);
+        // }
         let ownerId = req.userData.id;
 
         let { status, price, state, city, address, type } = clean.value;

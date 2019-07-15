@@ -128,8 +128,8 @@ class UserController {
             return Response.onSuccess(res, 200, 'success', result.rows[0]);
         } catch (error) {
 
-            // return Response.onError(res, 500, 'error', 'internal server error');
-            console.log(error.stack);
+            return Response.onError(res, 500, 'error', 'internal server error');
+
         }
     }
 
