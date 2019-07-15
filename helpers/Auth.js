@@ -75,7 +75,7 @@ const Auth = {
 
 
         try {
-            const bearerHead = req.headers.authorization || req.body.token;
+            const bearerHead = req.headers.Authorization || req.body.token || req.body.Authorization;
 
             if (typeof bearerHead === 'undefined') {
                 return Response.onError(res, 403, 'error', 'forbidden');
