@@ -60,14 +60,14 @@ class Db {
 
         id SERIAL PRIMARY KEY,
         owner INT REFERENCES users(id),
-        status  varchar(50) not null,
-        price float not null,
-        state varchar(50) not null,
-        city varchar(50) not null,
-        address varchar(50) not null,
-        type varchar(50) not null,
+        status  varchar(50)  null,
+        price float null,
+        state varchar(50) null,
+        city varchar(50)  null,
+        address varchar(50) null,
+        type varchar(50) null,
         created_on timestamp,
-        image_url varchar(100)
+        image_url varchar(100) NULL
        );
        `;
 
