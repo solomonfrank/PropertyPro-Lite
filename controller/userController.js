@@ -117,14 +117,15 @@ class UserController {
                 type: result.rows[0].type,
 
             };
+            console.log(payload);
             result.rows[0].token = await Auth.generateToken(payload, res);
 
 
             return Response.onSuccess(res, 200, 'success', result.rows[0]);
         } catch (error) {
 
-            return Response.onError(res, 500, 'error', 'internal server error');
-            //console.log(error.stack);
+            // return Response.onError(res, 500, 'error', 'internal server error');
+            console.log(error.stack);
         }
     }
 
