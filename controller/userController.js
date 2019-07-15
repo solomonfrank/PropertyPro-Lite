@@ -90,7 +90,7 @@ class UserController {
         // const { email, password } = clean.value;
 
         //const body = { email };
-        console.log(req.body);
+
         const {
             email, password,
         } = req.body;
@@ -102,16 +102,16 @@ class UserController {
         }
 
         try {
-            console.log('oooooo');
+
             let body = { email };
             const result = await User.init().findByEmail(body);
-            console.log(result);
+
 
             if (!result.rows[0]) {
                 return Response.onError(res, 400, 'error', 'invalid credential');
             }
             const hashPassword = result.rows[0].password;
-            console.log('yyyyy')
+
             const pass = await Validation.init().verifyPassword(password, hashPassword);
             if (!pass) {
                 return Response.onError(res, 400, 'error', 'invalid email or password');
@@ -121,7 +121,7 @@ class UserController {
                 type: result.rows[0].type,
 
             };
-            console.log(payload);
+
             result.rows[0].token = await Auth.generateToken(payload, res);
 
 

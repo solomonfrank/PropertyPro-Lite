@@ -25,9 +25,11 @@ class PropertyController {
         // if (clean.error) {
         //return Response(res, 400, clean.error.details[0].message);
         // }
+        console.log(req.userData.id);
         let ownerId = req.userData.id;
 
-        let { status, price, state, city, address, type } = clean.value;
+
+        let { status, price, state, city, address, type } = req.body;
         let body = { status, price, state, city, address, type };
         body.owner = ownerId;
         body.created_on = new Date();
@@ -40,7 +42,7 @@ class PropertyController {
 
         } catch (err) {
 
-
+            console.log(err.stack);
             return Response(res, 500, 'error', "Internal server error");
         }
 

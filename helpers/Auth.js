@@ -35,6 +35,7 @@ const Auth = {
         }
         let tokenArray = bearerHead.split(' ');
         let token = tokenArray[1];
+        console.log(token)
 
 
 
@@ -62,9 +63,11 @@ const Auth = {
 
 
             req.userData = params;
+            console.log(req.userData);
             next();
         } catch (err) {
-            return Response.onError(res, 403, 'invalid token provided');
+            // return Response.onError(res, 403, 'invalid token provided');
+            console.log(err.stack);
         }
     },
 };
