@@ -57,7 +57,8 @@ class PropertyController {
 
         try {
             let found = await User.init().findById(id, '*');
-            body.owner_email = found.rows[0].email;
+            console.log(found.rows[0]);
+            body.owner_email = found.rows[0].owner_email;
 
             return await Property.init().insertAll(res, body);
 
