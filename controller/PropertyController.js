@@ -19,31 +19,32 @@ app.use(
 class PropertyController {
 
     static async create(req, res) {
-        console.log(req.body);
-        // let schema = Validation.init().validateCreateProp();
-        //let clean = Joi.validate(req.body, schema);
-        // if (clean.error) {
-        //return Response(res, 400, clean.error.details[0].message);
-        // }
+
+        let schema = Validation.init().validateCreateProp();
+        let clean = Joi.validate(req.body, schema);
+        if (clean.error) {
+            return Response(res, 400, clean.error.details[0].message);
+        }
         console.log(req.userData.id);
         let ownerId = req.userData.id;
 
 
-        let { status, price, state, city, address, type } = req.body;
-        let body = { status, price, state, city, address, type };
+        let { price, state, city, address, type, imge_url } = clean.value;
+        let body = { price, state, city, address, type };
         body.owner = ownerId;
         body.created_on = new Date();
 
         try {
 
             return await Property.init().insertAll(res, body);
+
             // let result = await Property.init().insert(body);
             //  return Response.onSuccess(res, 201, result.rows[0]);
 
         } catch (err) {
 
             console.log(err.stack);
-            return Response(res, 500, 'error', "Internal server error");
+            // return Response(res, 500, 'error', "Internal server error");
         }
 
 

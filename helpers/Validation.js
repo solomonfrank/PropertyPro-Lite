@@ -75,12 +75,13 @@ class Validation {
         this.schema = {
 
 
-            status: this.sanitizeName(),
+
             price: Joi.number().required(),
             state: this.sanitizeName(),
             city: this.sanitizeName(),
             address: this.sanitizeName(),
             type: this.sanitizeName(),
+            imge_url: Joi.string(),
 
 
         };
