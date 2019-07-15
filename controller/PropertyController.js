@@ -20,18 +20,20 @@ class PropertyController {
 
     static async create(req, res) {
 
-        //   let { price, status, state, city, address, type, image_url } = req.body;
-
+        let { price, status, state, city, address, type, image_url } = req.body;
+        if (!price || !status || !type || !image_url || !address || !state || !city) {
+            return Response.onError(res, 400, 'error', 'fields are required');
+        }
         //  if ((Object.keys(req.body).length < 1)) {
         //  console.log('yes')
         // return Response.onError(res, 400, 'error', 'fields are required');
         // }
-        let schema = Validation.init().validateCreateProp();
-        let clean = Joi.validate(req.body, schema);
-        if (clean.error) {
-            return Response.onError(res, 400, 'error', clean.error.details[0].message);
-        }
-        let { price, status, state, city, address, type, image_url } = clean.value;
+        // let schema = Validation.init().validateCreateProp();
+        //let clean = Joi.validate(req.body, schema);
+        //if (clean.error) {
+        //return Response.onError(res, 400, 'error', clean.error.details[0].message);
+        //}
+        //let { price, status, state, city, address, type, image_url } = clean.value;
 
         let ownerId = req.userData.id;
 

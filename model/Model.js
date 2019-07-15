@@ -111,7 +111,7 @@ class Model {
 
     async  insertAll(res, body) {
         let result = await this.insert(body);
-        console.log(result.rows[0]);
+        // console.log(result.rows[0]);
         return Response.onSuccess(res, 201, 'success', result.rows[0]);
 
     }
