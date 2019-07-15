@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import Response from './Response';
 import dotenv from 'dotenv';
 import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
-import { multerUploads, dataUri } from '..multer/config/multer'
+import { multerUploads, dataUri } from '../config/multer'
 dotenv.config();
 
 
