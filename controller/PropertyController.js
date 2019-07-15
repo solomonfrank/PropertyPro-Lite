@@ -52,8 +52,13 @@ class PropertyController {
         body.owner = req.userData.id;
         body.created_on = new Date();
         body.image_url = req.image_url;
+        let id = body.owner;
+
 
         try {
+            let found = await User.init().findById(id, '*');
+            body.owner_email = found.rows[0].email;
+
             return await Property.init().insertAll(res, body);
 
             // let result = await Property.init().insert(body);
@@ -70,9 +75,8 @@ class PropertyController {
     static async update(req, res) {
 
         let propId = req.params.id;
-        console.log(req.body);
 
-        console.log(propId)
+
         // let schema = Validation.init().validateCreateProp();
         //let clean = Joi.validate(req.body, schema);
         //if (clean.error) {
@@ -164,7 +168,7 @@ class PropertyController {
             let resultArray = result.rows;
 
             if (resultArray.length < 1) {
-                return Response.onSuccess(res, 200, 'succes', 'result not found');
+                return Response.onSuccess(res, 200, 'success', 'result not found');
 
             }
             return Response.onSuccess(res, 200, 'success', resultArray)
@@ -178,14 +182,14 @@ class PropertyController {
     static async getProperty(req, res) {
 
         let id = req.params.id;
-        if (isNaN(id)) {
-            return Response.onError(res, 400, 'error', 'invalid property number');
-        }
+        console.log(id);
+
 
 
 
         try {
             const found = await Property.init().findById(id, '*');
+            console.log(found);
             if (typeof found.rows[0] === 'undefined') {
 
                 return Response.onError(res, 404, 'error', 'property does not exist');
