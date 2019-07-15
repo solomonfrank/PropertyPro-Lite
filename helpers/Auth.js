@@ -68,13 +68,47 @@ const Auth = {
             }
 
 
-            req.userData = params;
+            req.token = params;
 
             next();
         } catch (err) {
             return Response.onError(res, 403, 'invalid token provided');
             // console.log(err.stack);
         }
+    },
+
+    async Authorization(req, res, next) {
+
+
+
+        try {
+            const bearerHead = req.headers.authorization || req.body.token;
+
+            if (typeof bearerHead === 'undefined') {
+                return Response.onError(res, 403, 'error', 'forbidden');
+            }
+            let tokenArray = bearerHead.split(' ');
+            let token = tokenArray[1];
+            req.token = token;
+            console.log(req.token);
+            next();
+        } catch (error) {
+            console.log(error.stack);
+        }
+
+
+
+
+        // token = token.trim();
+
+
+
+        const decoded = await jwt.verify(token, process.env.SECRET_KEY);
+
+
+        const { id } = decoded.key;
+
+
     },
     async verifyField(req, res, next) {
 
