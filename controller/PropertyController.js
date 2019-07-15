@@ -6,6 +6,8 @@ import Validation from '../helpers/Validation';
 import Auth from '../helpers/Auth';
 import Response from '../helpers/Response';
 import Property from '../model/Property';
+import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
+import { multerUploads, dataUri } from '../config/multer';
 
 
 const app = express();
@@ -19,8 +21,20 @@ app.use(
 class PropertyController {
 
     static async create(req, res) {
+        let image
+        if (req.file) {
+            try {
+                const file = dataUri(req).content;
+                let result = await uploader.upload(file);
+                image = result.url;
 
-        let { price, status, state, city, address, type, image_url } = req.body;
+            } catch (error) {
+                console.log(error.stack);
+                return Response.onError(res, 400, 'error', 'image is required');
+            }
+
+        }
+        let { price, status, state, city, address, type } = req.body;
         if (!price || !status || !type || !image_url || !address || !state || !city) {
             return Response.onError(res, 400, 'error', 'fields are required');
         }

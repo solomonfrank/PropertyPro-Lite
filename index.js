@@ -10,11 +10,17 @@ import Auth from './helpers/Auth';
 import Db from './config/connection';
 
 import MailController from './config/Mail';
+import { resolve } from 'path';
+
+import { uploader, cloudinaryConfig } from './config/cloudinaryConfig'
+import { multerUploads, dataUri } from './config/multer';
+
+// app.use(express.static(resolve(__dirname, 'src/public')));
 
 dotenv.config();
 
 const app = express();
-
+app.use('*', cloudinaryConfig);
 
 //(async () => {
 // Db.createUsersTable();
@@ -31,10 +37,11 @@ app.use(
         extended: true,
     }),
 );
+// app.use('*', cloudinaryConfig);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.post('/auth/signup', UserController.signup);
 app.post('/auth/signin', UserController.signin);
-app.post('/property', Auth.verifyToken, PropertyController.create);
+app.post('/property', Auth.verifyToken, multerUploads, PropertyController.create);
 //app.patch('/property/:id', Auth.verifyToken, PropertyController.update);
 //app.patch('/property/:id/sold', Auth.verifyToken, PropertyController.updateStatus);
 //app.delete('/property/:id', Auth.verifyToken, PropertyController.delete);
