@@ -68,7 +68,7 @@ class Db {
         type varchar(50) null,
         created_on timestamp,
         image_url varchar(100) NULL,
-        owner_email VARCHAR(100) NOT NULL
+        owner_email VARCHAR(100) NULL
        );
        `;
 
