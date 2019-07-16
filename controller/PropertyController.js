@@ -27,7 +27,7 @@ class PropertyController {
 
         //  if ((Object.keys(req.body).length < 1)) {
         //  console.log('yes')
-        // return Response.onError(res, 400, 'error', 'fields are required');
+        // return Rehrsponse.onError(res, 400, 'error', 'fields are required');
         // }
         // let schema = Validation.init().validateCreateProp();
         //let clean = Joi.validate(req.body, schema);
@@ -59,7 +59,7 @@ class PropertyController {
 
         try {
             let found = await User.init().find({ id });
-            console.log(found.rows[0].owner_email);
+            console.log(found.rows[0].email);
             body.owner_email = found.rows[0].owner_email;
             console.log(body);
 
@@ -132,7 +132,8 @@ class PropertyController {
             return Response.onSuccess(res, 200, result.rows[0]);
         }
         catch (err) {
-            return Response.onError(res, 500, 'internal server error');
+            //return Response.onError(res, 500, 'internal server error');
+            console.log(err.stack);
         }
 
 
