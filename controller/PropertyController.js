@@ -166,9 +166,13 @@ class PropertyController {
     }
 
     static async getAllProperty(req, res) {
+        const { token } = req.body || req.header('Authorization');
 
         try {
 
+            if (!token) {
+                return Response.onError(res, 403, 'error', 'Not authorize to access the page');
+            }
             const result = await Property.init().findAll('*');
 
             console.log(result)
