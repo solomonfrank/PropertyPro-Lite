@@ -3,7 +3,7 @@ const Response = {
 
     onSuccess(res, statusCode, msg, responseText) {
         const value = responseText;
-        if (value.password) {
+        if (typeof value.password !== 'undefined') {
             delete value.password;
         }
 
