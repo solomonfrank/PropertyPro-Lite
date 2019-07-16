@@ -166,16 +166,16 @@ class PropertyController {
     }
 
     static async getAllProperty(req, res) {
-        console.log(req);
+
         try {
 
             const result = await Property.init().findAll('*');
 
-
+            console.log(result)
             let resultArray = result.rows;
 
             if (resultArray.length < 1) {
-                return Response.onError(res, 404, 'success', 'result not found');
+                return Response.onSuccess(res, 404, 'success', 'result not found');
 
             }
             console.log(resultArray);
