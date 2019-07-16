@@ -54,15 +54,14 @@ class PropertyController {
         body.created_on = new Date();
         body.image_url = req.image_url;
         let id = parseInt(body.owner);
-        console.log(id);
+
         let searchBy = { id }
 
         try {
             let found = await User.init().find({ id });
-            console.log(found.rows[0])
-            console.log(found.rows[0].email);
+
             body.owner_email = found.rows[0].email;
-            console.log(body);
+
 
             return await Property.init().insertAll(res, body);
 
@@ -115,7 +114,7 @@ class PropertyController {
         // if (clean.error) {
         // return Response.onError(res, 400, clean.error.details[0].message);
         // }
-        console.log(req.body);
+
         // let { status } = req.body;
         //  let body = { status }
         let cBody = { status: "sold" }
@@ -198,7 +197,7 @@ class PropertyController {
 
         try {
             const found = await Property.init().findById(id, '*');
-            console.log(found);
+
             if (typeof found.rows[0] === 'undefined') {
 
                 return Response.onError(res, 404, 'error', 'property does not exist');
