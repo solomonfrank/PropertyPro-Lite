@@ -70,8 +70,8 @@ class PropertyController {
 
         } catch (err) {
 
-            console.log(err.stack);
-            // return Response(res, 500, 'error', "Internal server error");
+            // console.log(err.stack);
+            return Response(res, 500, 'error', "Internal server error");
         }
 
 
@@ -132,8 +132,8 @@ class PropertyController {
             return Response.onSuccess(res, 200, 'success', result.rows[0]);
         }
         catch (err) {
-            //return Response.onError(res, 500, 'internal server error');
-            console.log(err.stack);
+            return Response.onError(res, 500, 'internal server error');
+            // console.log(err.stack);
         }
 
 
@@ -159,8 +159,8 @@ class PropertyController {
             return Response.onSuccess(res, 200, 'success', { message: "property deleted succesfully" });
 
         } catch (err) {
-            //return Response.onError(res, 500, 'internal server error');
-            console.log(err.stack);
+            return Response.onError(res, 500, 'internal server error');
+            // console.log(err.stack);
 
         }
     }
@@ -175,19 +175,19 @@ class PropertyController {
             }
             const result = await Property.init().findAll('*');
 
-            console.log(result)
+
             let resultArray = result.rows;
 
-            //  if (resultArray.length < 1) {
-            //  return Response.onSuccess(res, 404, 'success', 'result not found');
+            if (resultArray.length < 1) {
+                return Response.onSuccess(res, 404, 'success', 'result not found');
 
-            //    }
-            console.log(resultArray);
+            }
+
             return Response.onSuccess(res, 200, 'success', resultArray)
         } catch (err) {
 
-            // return Response.onError(res, 500, 'error', 'Internal server error');
-            console.log(err.stack);
+            return Response.onError(res, 500, 'error', 'Internal server error');
+            //console.log(err.stack);
         }
 
     }
@@ -241,8 +241,8 @@ class PropertyController {
         } catch (error) {
 
 
-            // return Response.onError(res, 500, 'error', 'Internal server error');
-            console.log(error.stack);
+            return Response.onError(res, 500, 'error', 'Internal server error');
+            //console.log(error.stack);
         }
 
 
