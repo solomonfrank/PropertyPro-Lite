@@ -174,10 +174,10 @@ class PropertyController {
             console.log(result)
             let resultArray = result.rows;
 
-            if (resultArray.length < 1) {
-                return Response.onSuccess(res, 404, 'success', 'result not found');
+            //  if (resultArray.length < 1) {
+            //  return Response.onSuccess(res, 404, 'success', 'result not found');
 
-            }
+            //    }
             console.log(resultArray);
             return Response.onSuccess(res, 200, 'success', resultArray)
         } catch (err) {
