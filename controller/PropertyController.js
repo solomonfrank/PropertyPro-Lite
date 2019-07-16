@@ -123,13 +123,12 @@ class PropertyController {
         try {
 
             let found = await Property.init().findById(id, '*');
-            console.log('kkekek');
-            console.log(found.rows[0]);
+
             if (!found.rows[0]) {
                 return Response.onError(res, 404, 'Property does not exist');
             }
             let result = await Property.init().update(id, cBody);
-            console.log(result.rows[0]);
+
             return Response.onSuccess(res, 200, 'success', result.rows[0]);
         }
         catch (err) {
@@ -167,7 +166,7 @@ class PropertyController {
     }
 
     static async getAllProperty(req, res) {
-
+        console.log(req);
         try {
 
             const result = await Property.init().findAll('*');
@@ -191,7 +190,7 @@ class PropertyController {
     static async getProperty(req, res) {
 
         let id = req.params.id;
-        console.log(id);
+
 
 
 
