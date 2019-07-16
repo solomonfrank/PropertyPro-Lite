@@ -182,7 +182,8 @@ class PropertyController {
             return Response.onSuccess(res, 200, 'success', resultArray)
         } catch (err) {
 
-            return Response.onError(res, 500, 'error', 'Internal server error');
+            // return Response.onError(res, 500, 'error', 'Internal server error');
+            console.log(err.stack);
         }
 
     }
@@ -209,7 +210,7 @@ class PropertyController {
 
 
             if (resultArray.length < 1) {
-                return Response.onSuccess(res, 200, 'success', 'result not found');
+                return Response.onSuccess(res, 404, 'success', 'result not found');
 
             }
             return Response.onSuccess(res, 200, 'success', resultArray)
@@ -236,7 +237,8 @@ class PropertyController {
         } catch (error) {
 
 
-            return Response.onError(res, 500, 'error', 'Internal server error');
+            // return Response.onError(res, 500, 'error', 'Internal server error');
+            console.log(error.stack);
         }
 
 
