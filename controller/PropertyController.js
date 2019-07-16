@@ -129,7 +129,8 @@ class PropertyController {
                 return Response.onError(res, 404, 'Property does not exist');
             }
             let result = await Property.init().update(id, cBody);
-            return Response.onSuccess(res, 200, result.rows[0]);
+            console.log(result.rows[0]);
+            return Response.onSuccess(res, 200, 'success', result.rows[0]);
         }
         catch (err) {
             //return Response.onError(res, 500, 'internal server error');
