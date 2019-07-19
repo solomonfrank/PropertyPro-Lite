@@ -66,7 +66,7 @@ class PropertyController {
             return await Property.init().insertAll(res, body);
 
             // let result = await Property.init().insert(body);
-            // return Response.onSuccess(res, 201, result.rows[0]);
+            //  return Response.onSuccess(res, 201, result.rows[0]);
 
         } catch (err) {
 

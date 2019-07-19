@@ -7,83 +7,108 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Testing for create property endpoint', () => {
+    let tokens;
+
+
+
+
     it('user can create property  if valid token provided', (done) => {
         //mock login to get token
-        const valid_input = {
-            "email": "test9@yahoo.com",
-            "password": "1234567"
-        }
-        //send login request to the app to receive token
-        chai.request(app).post('/auth/signin')
-            .send(valid_input)
-            .end((err, response) => {
-
-                //add token to next request Authorization headers as Bearer adw3R£$4wF43F3waf4G34fwf3wc232!w1C"3F3VR
-                const token = response.body.data.token;
-                console.log(token);
-
-                const data = {
-
-                    status: 'available',
-                    price: 52525,
-                    state: 'Lagos',
-                    city: 'Lagos',
-                    address: 'Lagos',
-                    type: '2bedroom',
-                };
-                chai.request(app).post('/property')
-                    .set('Authorization', `Bearer ${token}`)
-                    .send(data)
-                    .end((err, res) => {
-
-                        res.body.should.have.status(201);
-                        res.body.should.be.a('object');
-                        res.body.should.have.property('data');
-                        res.body.data.should.have.property('id');
-                        res.body.data.should.have.property('status');
-                        res.body.data.should.have.property('ownerid');
-                        res.body.data.should.have.property('price');
-                        res.body.data.should.have.property('state');
-                        res.body.data.should.have.property('city');
-                        res.body.data.should.have.property('address');
-                        res.body.data.should.have.property('type');
-                        res.body.data.should.have.property('image_url');
-                        res.body.data.should.have.property('created_on');
-                        res.body.should.have.property('status').equal(201);
+        (async function () {
+            const valid_input = {
+                "email": "test5@yahoo.com",
+                "password": "1234567"
+            }
+            const data = {
 
 
-                        done();
-                    });
-            });
-    })
+                price: 52525,
+                state: 'Lagos',
+                city: 'Lagos',
+                address: 'Lagos',
+                type: '2bedroom',
+            };
 
+            try {
+                let request = chai.request(app).keepOpen();
 
-
-    it('user can not create property when token is missing', (done) => {
-
-        const data = {
-
-            status: 'available',
-            price: 52525,
-            state: 'Lagos',
-            city: 'Lagos',
-            address: 'Lagos',
-            type: '2bedroom',
-        };
-
-        chai
-            .request(app)
-
-            .post('/property')
-
-            .send(data)
-            .end((err, res) => {
-                res.body.should.have.status(403);
+                let signResponse = await request.post('/auth/signin').send(valid_input);
+                let token = signResponse.body.data.token;
+                let res = await request.post('/api/v1/property').set('Authorization', `Bearer ${token}`).send(data)
+                res.body.should.have.status('success');
                 res.body.should.be.a('object');
-                res.body.should.have.property('data').equal('forbidden');
+                res.body.should.have.property('data');
+                res.body.should.have.property('data');
+                res.body.data.should.have.property('id');
+                res.body.data.should.have.property('status');
+                res.body.data.should.have.property('owner');
+                res.body.data.should.have.property('price');
+                res.body.data.should.have.property('state');
+                res.body.data.should.have.property('city');
+                res.body.data.should.have.property('address');
+                res.body.data.should.have.property('type');
+                res.body.data.should.have.property('image_url');
+                res.body.data.should.have.property('created_on');
 
-                res.body.should.have.property('status').equal(403);
-                done();
-            });
+                done()
+            } catch (err) { console.log(err.stack) }
+
+        })();
+
+        //send login request to the app to receive token
+
+
+
+
+
+
+
+
+
     });
+
+    it('user can not create property  if valid token is not provided', (done) => {
+        //mock login to get token
+        (async function () {
+            const valid_input = {
+                "email": "test5@yahoo.com",
+                "password": "1234567"
+            }
+            const data = {
+
+
+                price: 52525,
+                state: 'Lagos',
+                city: 'Lagos',
+                address: 'Lagos',
+                type: '2bedroom',
+            };
+
+            try {
+                let request = chai.request(app).keepOpen();
+
+                let signResponse = await request.post('/auth/signin').send(valid_input);
+                let token = "";
+                let res = await request.post('/api/v1/property').set('Authorization', `Bearer ${token}`).send(data)
+                res.body.should.have.status('error');
+
+                done();
+
+
+            } catch (err) { console.log(err.stack) }
+
+        })();
+
+        //send login request to the app to receive token
+
+
+
+
+
+
+
+
+
+    });
+
 });
