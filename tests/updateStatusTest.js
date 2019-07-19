@@ -9,8 +9,10 @@ chai.use(chaiHttp);
 describe('Testing for update status property endpoint', () => {
     it('user can update  status property  if valid token provided', (done) => {
         //mock login to get token
+
+
         const validInput = {
-            "email": "test9@yahoo.com",
+            "email": "test5@yahoo.com",
             "password": "1234567"
         }
 
