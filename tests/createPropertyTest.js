@@ -16,7 +16,7 @@ describe('Testing for create property endpoint', function () {
         //mock login to get token
         (async function () {
             const valid_input = {
-                "email": "test5@yahoo.com",
+                "email": "test10@yahoo.com",
                 "password": "1234567"
             }
             const data = {
