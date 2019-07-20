@@ -1,1 +1,77 @@
-{"processes":{"95ce1d40-3329-4366-8483-0387d0666f90":{"parent":"9839c720-0ed7-4a45-bca3-3538b10e58cc","children":[]},"9839c720-0ed7-4a45-bca3-3538b10e58cc":{"parent":null,"children":["95ce1d40-3329-4366-8483-0387d0666f90"]}},"files":{"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\createPropertyTest.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\index.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\controller\\userController.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\model\\User.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\model\\Model.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\config\\connection.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\helpers\\Response.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\model\\Property.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\helpers\\Validation.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\helpers\\Auth.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\controller\\PropertyController.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\config\\Mail.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\signinTest.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\signupTest.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\updateStatusTest.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\updateTest.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\viewAllTest.js":["95ce1d40-3329-4366-8483-0387d0666f90"],"C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\viewTest.js":["95ce1d40-3329-4366-8483-0387d0666f90"]},"externalIds":{}}
+{
+    "processes": {
+        "a96874f4-f922-4076-b927-36b4507d76f8": {
+            "parent": "e15fdd80-13bd-4422-8f13-2a4eb954cf94",
+            "children": []
+        },
+        "e15fdd80-13bd-4422-8f13-2a4eb954cf94": {
+            "parent": null,
+            "children": [
+                "a96874f4-f922-4076-b927-36b4507d76f8"
+            ]
+        }
+    },
+    "files": {
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\createPropertyTest.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\index.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\controller\\userController.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\model\\User.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\model\\Model.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\config\\connection.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\helpers\\Response.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\model\\Property.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\helpers\\Validation.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\helpers\\Auth.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\config\\cloudinaryConfig.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\config\\multer.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\controller\\PropertyController.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\config\\Mail.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\signinTest.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\signupTest.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\updateStatusTest.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\updateTest.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\viewAllTest.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ],
+        "C:\\Users\\Rock\\Desktop\\PropertyPro-Lite\\tests\\viewTest.js": [
+            "a96874f4-f922-4076-b927-36b4507d76f8"
+        ]
+    },
+    "externalIds": {}
+}
