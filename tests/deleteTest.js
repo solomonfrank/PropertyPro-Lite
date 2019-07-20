@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('Testing for delete property endpoint', function () {
     let tokens;
-    this.timeout(5000);
+    this.timeout(0);
 
 
 

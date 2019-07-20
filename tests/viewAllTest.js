@@ -7,8 +7,8 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Testing for view  all property endpoint', function () {
-    let tokens;
-    this.timeout(5000);
+
+    this.timeout(0);
 
 
 
@@ -17,7 +17,7 @@ describe('Testing for view  all property endpoint', function () {
         //mock login to get token
         (async function () {
             const valid_input = {
-                "email": "test5@yahoo.com",
+                "email": "test10@yahoo.com",
                 "password": "1234567"
             }
 
