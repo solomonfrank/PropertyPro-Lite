@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('Testing for update property endpoint', function () {
     let tokens;
-    this.timeout(0);
+    this.timeout(5000);
 
 
 

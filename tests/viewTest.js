@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 describe('Testing for view specific property endpoint', function () {
     let tokens;
 
-    this.timeout(0);
+    this.timeout(5000);
 
 
     it('user can view specific property details if valid token provided and property is available', (done) => {
