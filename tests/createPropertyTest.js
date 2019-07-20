@@ -31,8 +31,10 @@ describe('Testing for create property endpoint', function () {
 
             try {
                 let request = chai.request(app).keepOpen();
-
+                console.log(request.body)
                 let signResponse = await request.post('/auth/signin').send(valid_input);
+                console.log(signResponse);
+                console.log('hello');
                 let token = signResponse.body.data.token;
                 console.log(token);
                 let res = await request.post('/property').set('Authorization', `Bearer ${token}`)
@@ -42,7 +44,10 @@ describe('Testing for create property endpoint', function () {
 
 
                 done();
-            } catch (err) { console.log(err.stack) }
+            } catch (err) {
+                console.log('hello error');
+                console.log(err.stack);
+            }
 
         })();
 
