@@ -6,109 +6,87 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for update status property endpoint', () => {
-    it('user can update  status property  if valid token provided', (done) => {
+describe('Testing for  property sold status endpoint', () => {
+    let tokens;
+
+
+
+
+    it('user can update property  status if valid token provided and property is available', (done) => {
         //mock login to get token
+        (async function () {
+            const valid_input = {
+                "email": "test5@yahoo.com",
+                "password": "1234567"
+            }
+            let res;
+
+            try {
+                let request = chai.request(app).keepOpen();
+                let id = 3;
+
+                let signResponse = await request.post('/auth/signin').send(valid_input);
+                let token = signResponse.body.data.token;
+                res = await request.patch(`/property/${id}/sold`).set('Authorization', `Bearer ${token}`).send();
+
+                res.body.should.have.status('success');
 
 
-        const validInput = {
-            "email": "test5@yahoo.com",
-            "password": "1234567"
-        }
+                done()
+            } catch (err) {
+                // console.log(err.stack) 
+                res.body.should.have.status('Property does not exist');
+            }
 
-        chai.request(app).post('/auth/signin')
-            .send(validInput)
-            .end((err, response) => {
+        })();
 
-
-                const token = response.body.data.token;
-                console.log(token);
-                const propId = 4;
-                const data = {
-
-                    "status": "sold"
-
-                };
-                chai.request(app).patch(`/property/${propId}/sold`)
-                    .set('Authorization', `Bearer ${token}`)
-                    .send(data)
-                    .end((err, res) => {
-
-                        res.body.should.have.status(200);
-                        res.body.should.be.a('object');
-                        res.body.should.have.property('data');
-                        res.body.data.should.have.property('id');
-                        res.body.data.should.have.property('status');
-                        res.body.data.should.have.property('ownerid');
-                        res.body.data.should.have.property('price');
-                        res.body.data.should.have.property('state');
-                        res.body.data.should.have.property('city');
-                        res.body.data.should.have.property('address');
-                        res.body.data.should.have.property('type');
-                        res.body.data.should.have.property('image_url');
-                        res.body.data.should.have.property('created_on');
-                        res.body.should.have.property('status').equal(200);
+        //send login request to the app to receive token
 
 
-                        done();
-                    });
-            });
-    })
 
 
-    it('user can not update status property when token is missing', (done) => {
-
-        const propId = 1;
-        const data = {
-
-            status: 'sold',
 
 
-        };
 
-        chai
-            .request(app)
 
-            .patch(`/property/${propId}`)
 
-            .send(data)
-            .end((err, res) => {
-                res.body.should.be.a('object');
-                res.body.should.have.status(403);
-                res.body.should.have.property('data').equal('forbidden');
-
-                res.body.should.have.property('status').equal(403);
-                done();
-            });
     });
 
+    it('user cannot update property  id property is not found', (done) => {
+        //mock login to get token
+        (async function () {
+            const valid_input = {
+                "email": "test5@yahoo.com",
+                "password": "1234567"
+            }
 
 
-    it('user can not status update property when token is missing', (done) => {
-        const token = '';
-        const propId = 1;
-        const data = {
+            try {
+                let request = chai.request(app).keepOpen();
+                let id = 100;
 
-            status: 'sold',
+                let signResponse = await request.post('/auth/signin').send(valid_input);
+                let token = signResponse.body.data.token;
+                let res = await request.patch(`/property/${id}/sold`).set('Authorization', `Bearer ${token}`).send();
+                console.log(res.body);
+                res.body.should.have.status('Property does not exist');
 
 
-        };
+                done()
+            } catch (err) { console.log(err.stack) }
 
-        chai
-            .request(app)
+        })();
 
-            .patch(`/property/${propId}/sold`)
-            .set('Authorization', `Bearer ${token}`)
-            .send(data)
-            .end((err, res) => {
-                res.body.should.be.a('object');
-                res.body.should.have.status(403);
-                res.body.should.have.property('data').equal('Not authorize to access the page');
+        //send login request to the app to receive token
 
-                res.body.should.have.property('status').equal(403);
-                done();
-            });
+
+
+
+
+
+
+
+
     });
-
 
 });
