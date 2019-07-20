@@ -17,7 +17,7 @@ describe('Testing for view  all property endpoint', function () {
         //mock login to get token
         (async function () {
             const valid_input = {
-                "email": "test10@yahoo.com",
+                "email": "test5@yahoo.com",
                 "password": "1234567"
             }
 

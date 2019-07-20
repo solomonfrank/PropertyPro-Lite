@@ -32,7 +32,7 @@ describe('Testing for signup endpoint', () => {
         });
     });
 
-    it('user should not signup when email is empty', (done) => {
+    it('user should not signup when email is wrong', (done) => {
         const dataVal = {
             email: 'yuueueu.com',
             password: '1234567',
@@ -57,7 +57,7 @@ describe('Testing for signup endpoint', () => {
 
     it('User should not sign up a user when password is not provided', (done) => {
         const dataVal = {
-            email: 'test59@yahoo.com',
+            email: 'test5915@yahoo.com',
             password: '',
 
             first_name: 'test',
@@ -85,7 +85,7 @@ describe('Testing for signup endpoint', () => {
 
     it('User should not sign up a user if email already exist', (done) => {
         const dataVal = {
-            email: 'test10@yahoo.com',
+            email: 'test5@yahoo.com',
             password: '1234567',
 
             first_name: 'test',
@@ -115,7 +115,7 @@ describe('Testing for signup endpoint', () => {
     it('sign up user when all fields are provided', (done) => {
         const dataVal = {
 
-            email: 'test2050@gmail.com',
+            email: 'test20505@gmail.com',
 
             password: '1234567',
 

@@ -21,7 +21,7 @@ describe('Testing for delete property endpoint', function () {
                 "password": "1234567"
             }
 
-
+            let res;
 
             try {
                 let request = chai.request(app).keepOpen();
@@ -33,7 +33,7 @@ describe('Testing for delete property endpoint', function () {
                 const data = {
                     token,
                 };
-                let res = await request.delete(`/property/${id}`).set('Authorization', `Bearer ${token}`).send(data);
+                res = await request.delete(`/property/${id}`).set('Authorization', `Bearer ${token}`).send(data);
 
                 res.body.should.have.status('error');
 
