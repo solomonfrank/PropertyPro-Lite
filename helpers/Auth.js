@@ -77,14 +77,14 @@ const Auth = {
 
         try {
             const bearerHead = req.header('Authorization') || req.body.token;
-            console.log(bearerHead);
+
             if (typeof bearerHead === 'undefined') {
                 return Response.onError(res, 403, 'error', 'forbidden');
             }
             let tokenArray = bearerHead.split(' ');
             let token = tokenArray[1];
             req.token = token;
-            console.log(req.token);
+            // console.log(req.token);
             next();
         } catch (error) {
             console.log(error.stack);
@@ -144,7 +144,7 @@ const Auth = {
                 console.log(err.stack);
             }
         } else {
-            return Response.onError(res, 400, 'error', 'fields are required');
+            return Response.onError(res, 400, 'error', 'file image is required');
 
         }
     },

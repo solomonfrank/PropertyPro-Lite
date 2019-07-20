@@ -24,8 +24,8 @@ describe('Testing for signin endpoint', () => {
                 res.body.should.be.a('object');
                 res.body.should.have
                     .property('error')
-                    .equal('"email address" is not allowed to be empty');
-                res.body.should.have.property('status').equal(400);
+                    .equal('email address is invalid');
+                res.body.should.have.property('status').equal('error');
                 done();
             });
     });
@@ -47,8 +47,8 @@ describe('Testing for signin endpoint', () => {
                 res.body.should.be.a('object');
                 res.body.should.have
                     .property('error')
-                    .equal('"password" is not allowed to be empty');
-                res.body.should.have.property('status').equal(400);
+                    .equal('some fields are required');
+                res.body.should.have.property('status').equal('error');
 
                 done();
             });
@@ -56,7 +56,7 @@ describe('Testing for signin endpoint', () => {
 
     it('sign in user when all fields are provided', (done) => {
         const dataVal = {
-            email: 'test1@yahoo.com',
+            email: 'test5@yahoo.com',
 
             password: '1234567',
         };
@@ -65,7 +65,7 @@ describe('Testing for signin endpoint', () => {
             .post('/auth/signin')
             .send(dataVal)
             .end((err, res) => {
-                // res.body.should.have.status(200);
+                res.body.should.have.status('success');
                 res.body.should.be.a('object');
                 res.body.should.have.property('data');
                 res.body.data.should.have.property('id');
@@ -75,10 +75,10 @@ describe('Testing for signin endpoint', () => {
                 res.body.data.should.have.property('last_name');
                 res.body.data.should.have.property('created_at');
                 res.body.data.should.have.property('address');
-                res.body.data.should.have.property('phonenumber');
+                res.body.data.should.have.property('phone_number');
                 res.body.data.should.have.property('is_admin');
-                res.body.data.should.have.property('gender');
-                res.body.should.have.property('status').equal(200);
+
+                // res.body.should.have.property('status');
                 done();
             });
     });
