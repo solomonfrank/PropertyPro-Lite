@@ -34,21 +34,11 @@ describe('Testing for create property endpoint', function () {
 
                 let signResponse = await request.post('/auth/signin').send(valid_input);
                 let token = signResponse.body.data.token;
-                let res = await request.post('/api/v1/property').set('Authorization', `Bearer ${token}`).send(data)
+                let res = await request.post('/property').set('Authorization', `Bearer ${token}`)
+                    .attach('image_url', 'tests/wild.jpg')
+                    .field(data)
                 res.body.should.have.status('success');
-                res.body.should.be.a('object');
-                res.body.should.have.property('data');
-                res.body.should.have.property('data');
-                res.body.data.should.have.property('id');
-                res.body.data.should.have.property('status');
-                res.body.data.should.have.property('owner');
-                res.body.data.should.have.property('price');
-                res.body.data.should.have.property('state');
-                res.body.data.should.have.property('city');
-                res.body.data.should.have.property('address');
-                res.body.data.should.have.property('type');
-                res.body.data.should.have.property('image_url');
-                res.body.data.should.have.property('created_on');
+
 
                 done()
             } catch (err) { console.log(err.stack) }
@@ -56,15 +46,6 @@ describe('Testing for create property endpoint', function () {
         })();
 
         //send login request to the app to receive token
-
-
-
-
-
-
-
-
-
     });
 
     it('user can not create property  if valid token is not provided', (done) => {
