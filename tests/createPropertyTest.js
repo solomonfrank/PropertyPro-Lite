@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('Testing for create property endpoint', function () {
     let tokens;
-    this.timeout(0);
+    this.timeout(5000);
 
 
 
@@ -31,12 +31,12 @@ describe('Testing for create property endpoint', function () {
 
             try {
                 let request = chai.request(app).keepOpen();
-                console.log(request.body)
+
                 let signResponse = await request.post('/auth/signin').send(valid_input);
-                console.log(signResponse);
-                console.log('hello');
+
+
                 let token = signResponse.body.data.token;
-                console.log(token);
+
                 let res = await request.post('/property').set('Authorization', `Bearer ${token}`)
                     .attach('image_url', 'tests/wild.jpg')
                     .field(data)

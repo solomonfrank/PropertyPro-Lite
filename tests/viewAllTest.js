@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('Testing for view  all property endpoint', function () {
 
-    this.timeout(0);
+    this.timeout(5000);
 
 
 
