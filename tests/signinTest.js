@@ -32,7 +32,7 @@ describe('Testing for signin endpoint', () => {
 
     it('User should not sign in a user when password is empty', (done) => {
         const dataVal = {
-            email: 'test6@yahoo.com',
+            email: 'test10@yahoo.com',
 
             password: '',
         };
@@ -56,7 +56,7 @@ describe('Testing for signin endpoint', () => {
 
     it('sign in user when all fields are provided', (done) => {
         const dataVal = {
-            email: 'test5@yahoo.com',
+            email: 'test10@yahoo.com',
 
             password: '1234567',
         };

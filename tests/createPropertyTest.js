@@ -6,9 +6,9 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for create property endpoint', () => {
+describe('Testing for create property endpoint', function () {
     let tokens;
-
+    this.timeout(0);
 
 
 

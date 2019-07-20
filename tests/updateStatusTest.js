@@ -6,8 +6,9 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for  property sold status endpoint', () => {
+describe('Testing for  property sold status endpoint', function () {
     let tokens;
+    this.timeout(0);
 
 
 
@@ -23,7 +24,7 @@ describe('Testing for  property sold status endpoint', () => {
 
             try {
                 let request = chai.request(app).keepOpen();
-                let id = 3;
+                let id = 18;
 
                 let signResponse = await request.post('/auth/signin').send(valid_input);
                 let token = signResponse.body.data.token;

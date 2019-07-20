@@ -6,17 +6,17 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for view specific property endpoint', () => {
+describe('Testing for view specific property endpoint', function () {
     let tokens;
 
-
+    this.timeout(0);
 
 
     it('user can view specific property details if valid token provided and property is available', (done) => {
         //mock login to get token
         (async function () {
             const valid_input = {
-                "email": "test5@yahoo.com",
+                "email": "test10@yahoo.com",
                 "password": "1234567"
             }
 
@@ -28,7 +28,7 @@ describe('Testing for view specific property endpoint', () => {
 
                 let signResponse = await request.post('/auth/signin').send(valid_input);
                 let token = signResponse.body.data.token;
-                const id = 3;
+                const id = 18;
                 const data = {
                     token,
                 };

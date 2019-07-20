@@ -6,9 +6,9 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for update property endpoint', () => {
+describe('Testing for update property endpoint', function () {
     let tokens;
-
+    this.timeout(0);
 
 
 
@@ -16,7 +16,7 @@ describe('Testing for update property endpoint', () => {
         //mock login to get token
         (async function () {
             const valid_input = {
-                "email": "test5@yahoo.com",
+                "email": "test10@yahoo.com",
                 "password": "1234567"
             }
             let res;
@@ -28,7 +28,7 @@ describe('Testing for update property endpoint', () => {
 
             try {
                 let request = chai.request(app).keepOpen();
-                let id = 3;
+                let id = 18;
 
                 let signResponse = await request.post('/auth/signin').send(valid_input);
                 let token = signResponse.body.data.token;

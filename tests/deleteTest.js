@@ -6,8 +6,9 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for delete property endpoint', () => {
+describe('Testing for delete property endpoint', function () {
     let tokens;
+    this.timeout(0);
 
 
 
@@ -16,7 +17,7 @@ describe('Testing for delete property endpoint', () => {
         //mock login to get token
         (async function () {
             const valid_input = {
-                "email": "test5@yahoo.com",
+                "email": "test10@yahoo.com",
                 "password": "1234567"
             }
 
@@ -28,7 +29,7 @@ describe('Testing for delete property endpoint', () => {
 
                 let signResponse = await request.post('/auth/signin').send(valid_input);
                 let token = signResponse.body.data.token;
-                const id = 2;
+                const id = 17;
                 const data = {
                     token,
                 };

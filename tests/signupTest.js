@@ -85,7 +85,7 @@ describe('Testing for signup endpoint', () => {
 
     it('User should not sign up a user if email already exist', (done) => {
         const dataVal = {
-            email: 'test5@yahoo.com',
+            email: 'test10@yahoo.com',
             password: '1234567',
 
             first_name: 'test',
@@ -115,7 +115,7 @@ describe('Testing for signup endpoint', () => {
     it('sign up user when all fields are provided', (done) => {
         const dataVal = {
 
-            email: 'test28131@gmail.com',
+            email: 'test2050@gmail.com',
 
             password: '1234567',
 

@@ -6,8 +6,9 @@ import app from '../index';
 chai.should();
 chai.use(chaiHttp);
 
-describe('Testing for view  all property endpoint', () => {
+describe('Testing for view  all property endpoint', function () {
     let tokens;
+    this.timeout(0);
 
 
 
