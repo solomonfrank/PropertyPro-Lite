@@ -38,14 +38,14 @@ describe('Testing for create property endpoint', function () {
                 let token = signResponse.body.data.token;
 
                 let res = await request.post('/property').set('Authorization', `Bearer ${token}`)
-                    .attach('image_url', 'tests/wild.jpg')
+                    .attach('image_url', 'tests/wild.jpeg')
                     .field(data)
                 res.body.should.have.status('success');
 
 
                 done();
             } catch (err) {
-                console.log('hello error');
+
                 console.log(err.stack);
             }
 
