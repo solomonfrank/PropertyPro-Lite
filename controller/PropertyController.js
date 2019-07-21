@@ -170,9 +170,9 @@ class PropertyController {
 
         try {
 
-            if (!token) {
-                return Response.onError(res, 403, 'error', 'Not authorize to access the page');
-            }
+         //   if (!token) {
+          //      return Response.onError(res, 403, 'error', 'Not authorize to access the page');
+          //  }
             const result = await Property.init().findAll('*');
 
 
