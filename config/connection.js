@@ -1,31 +1,32 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 
-let connectionString = process.env.DATABASE_LOCAL_URL || process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_LOCAL_URL || process.env.DATABASE_URL;
 class Db {
-    constructor() {
-        this.conn = new Pool({
-            connectionString,
-            ssl: true
+  constructor() {
+    this.conn = new Pool({
+      connectionString,
+      ssl: true,
 
-        });
+    });
 
-        console.log('connected');
-        return this.conn;
+    console.log('connected');
+    return this.conn;
+  }
+
+  static async getInstance() {
+    if (!this.pool) {
+      this.pool = new Db();
     }
-
-    static async getInstance() {
-        if (!this.pool) {
-            this.pool = new Db();
-        }
-        return this.pool;
-    }
+    return this.pool;
+  }
 
 
-    static async createUsersTable() {
-        this.createTableQuery = `
+  static async createUsersTable() {
+    this.createTableQuery = `
     CREATE TABLE IF NOT EXISTS
     users(
   id SERIAL PRIMARY KEY,
@@ -49,13 +50,13 @@ class Db {
   
     );
     `;
-        this.client = await Db.getInstance();
-        await this.client.query(`${this.createTableQuery}`);
-        // Db.getInstance(this.createTableQuery).catch(err => console.log(err));
-    }
+    this.client = await Db.getInstance();
+    await this.client.query(`${this.createTableQuery}`);
+    // Db.getInstance(this.createTableQuery).catch(err => console.log(err));
+  }
 
-    static async createPropertyTable() {
-        this.createTableQuery = ` 
+  static async createPropertyTable() {
+    this.createTableQuery = ` 
         CREATE TABLE IF NOT EXISTS property(
 
         id SERIAL PRIMARY KEY,
@@ -72,12 +73,9 @@ class Db {
        );
        `;
 
-        this.client = await Db.getInstance();
-        await this.client.query(`${this.createTableQuery}`);
-
-    }
-
-
+    this.client = await Db.getInstance();
+    await this.client.query(`${this.createTableQuery}`);
+  }
 }
 
 export default Db;

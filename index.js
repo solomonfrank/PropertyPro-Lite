@@ -8,7 +8,7 @@ import UserController from './controller/userController';
 import PropertyController from './controller/PropertyController';
 import Auth from './helpers/Auth';
 import Db from './config/connection';
-
+import cors from 'cors';
 import MailController from './config/Mail';
 import { resolve } from 'path';
 
@@ -21,6 +21,7 @@ dotenv.config();
 
 const app = express();
 app.use('*', cloudinaryConfig);
+app.use(cors());
 
 //(async () => {
 // Db.createUsersTable();
@@ -28,21 +29,21 @@ app.use('*', cloudinaryConfig);
 // })().catch(err => console.log(err.stack));
 
 const options = {
-    explorer: true,
+  explorer: true,
 };
 app.use(bodyParser.json());
 
 app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    }),
+  bodyParser.urlencoded({
+    extended: true,
+  }),
 );
 // app.use('*', cloudinaryConfig);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.post('/auth/signup', UserController.signup);
 app.post('/auth/signin', UserController.signin);
 app.post('/property', multerUploads, Auth.cloudinaryHandler, Auth.Authorization, Auth.verifyToken, PropertyController.create);
-// app.post('/api/v1/property', Auth.Authorization, Auth.verifyToken, PropertyController.create);
+
 app.patch('/property/:id', Auth.Authorization, Auth.verifyToken, PropertyController.update);
 app.patch('/property/:id/sold', Auth.Authorization, Auth.verifyToken, PropertyController.updateStatus);
 app.delete('/property/:id', Auth.Authorization, Auth.verifyToken, PropertyController.delete);
@@ -57,8 +58,8 @@ app.post('/auth/:email/reset_password', MailController.sendMail);
 // Set environment Port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(`listening to port ${PORT}`);
+  // eslint-disable-next-line no-console
+  console.log(`listening to port ${PORT}`);
 });
 
 
