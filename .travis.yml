@@ -9,11 +9,11 @@ addons:
      CODE_CLIMATE_REPO_TOKEN : process.env.CODE_CLIMATE_REPO_TOKEN
 
 
-service:
-  -postgresql  
+services:
+  -postgres 
 before_script:
-  
-  - psql -U postgres -c 'CREATE DATABASE "propertypro";'
+  - npm install
+  - psql -C 'create database propertypro;' -U postgres
   - psql -U postgres -f ./model/create.sql -d propertypro  
 script:
  - npm run test
