@@ -10,6 +10,7 @@ services:
   -postgresql 
 before_script:
   - npm install
+  - rm /usr/local/var/postgres/postmaster.pid
   - psql -c 'create database travis_ci_test;' -U postgres
 script:
  - npm run test
