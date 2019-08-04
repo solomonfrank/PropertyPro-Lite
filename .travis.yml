@@ -20,10 +20,10 @@ env:
 
 service:
   -postgresql  
-# before_script:
+ before_script:
   
-#   - psql -U postgres -c 'CREATE DATABASE "propertypro";'
-#   - psql -U postgres -f ./model/create.sql -d propertypro  
+  - psql -U postgres -c 'CREATE DATABASE "propertypro";'
+  - psql -U postgres -f ./model/create.sql -d propertypro  
 script:
  - npm run test
  
