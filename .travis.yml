@@ -5,8 +5,17 @@ cache:
   directories:
     - "node_modules"
 addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
   code_climate:
      CODE_CLIMATE_REPO_TOKEN : process.env.CODE_CLIMATE_REPO_TOKEN
+ 
+env:
+  global:
+  - PGPORT=5433
 
 
 service:
