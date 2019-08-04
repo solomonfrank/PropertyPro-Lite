@@ -10,11 +10,9 @@ addons:
 
 
 services:
-  -postgres 
+  -postgresql 
 before_script:
-  - npm install
-  - psql -U postgres -c 'CREATE DATABASE propertypro;'
-  - psql -U postgres -f ./model/create.sql -d propertypro  
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
  - npm run test
  
