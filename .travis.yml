@@ -1,9 +1,6 @@
 language: node_js
 node_js: 
   - "stable"
-cache:
-  directories:
-    - "node_modules"
 addons:
   code_climate:
      CODE_CLIMATE_REPO_TOKEN : process.env.CODE_CLIMATE_REPO_TOKEN
@@ -12,10 +9,10 @@ addons:
 services:
   -postgresql 
 before_script:
+  - npm install
   - psql -c 'create database travis_ci_test;' -U postgres
 script:
  - npm run test
- 
 
 after_success:
  - npm run coverage
